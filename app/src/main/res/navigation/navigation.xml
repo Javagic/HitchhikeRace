@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/nav_fragment_main">
+
+    <fragment
+        android:id="@+id/nav_fragment_main"
+        android:name="com.example.hitchhikerace.view.MainScreenViewImpl"
+        tools:layout="@layout/screen_main">
+        <action
+            android:id="@+id/main_to_create_event"
+            app:destination="@id/nav_fragment_create_event" />
+        <action
+            android:id="@+id/main_to_crew_management"
+            app:destination="@id/nav_fragment_crew_management" />
+        <action
+            android:id="@+id/main_to_current_statistic"
+            app:destination="@id/nav_fragment_current_statistic" />
+        <action
+            android:id="@+id/main_to_legend"
+            app:destination="@id/nav_fragment_legend" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fragment_create_event"
+        android:name="com.example.hitchhikerace.view.CreateBaseEventViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_car_start" />
+
+    <fragment
+        android:id="@+id/nav_fragment_crew_management"
+        android:name="com.example.hitchhikerace.view.CrewManagementViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_crew_managment" />
+
+    <fragment
+        android:id="@+id/nav_fragment_current_statistic"
+        android:name="com.example.hitchhikerace.view.CurrentStatisticViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_current_statistic" />
+
+    <fragment
+        android:id="@+id/nav_fragment_legend"
+        android:name="com.example.hitchhikerace.view.LegendaViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_current_statistic" />
+</navigation>
