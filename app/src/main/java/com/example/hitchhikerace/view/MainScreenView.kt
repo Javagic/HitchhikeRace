@@ -1,5 +1,5 @@
 package com.example.hitchhikerace.view
 
-class MainScreenView {
+interface MainScreenView {
 
 }
