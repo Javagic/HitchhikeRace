@@ -10,17 +10,14 @@ import io.reactivex.Observable
 interface RaceEventDao : BaseDao<RaceEventEntity> {
 
     @Query("SELECT * FROM $TABLE_RACE_EVENT")
-    fun getAll(): Observable<List<UserWidgetEntity>>
+    fun getAll(): Observable<List<RaceEventEntity>>
 
     @Query("DELETE FROM $TABLE_RACE_EVENT")
     fun clear(): Int
 
-    @Query("DELETE FROM $TABLE_RACE_EVENT WHERE profileKey = :profileKey")
-    fun clearByProfile(profileKey: String): Int
-
     @Transaction
-    fun fill(profileKey: String, widgetList: List<UserWidgetEntity>) {
-        clearByProfile(profileKey)
+    fun fill(profileKey: String, widgetList: List<RaceEventEntity>) {
+//        clearByProfile(profileKey)
         insert(widgetList)
     }
 
@@ -29,7 +26,7 @@ interface RaceEventDao : BaseDao<RaceEventEntity> {
         clear()
         profileKeys.forEach { profileKey ->
             widgetList.forEachIndexed { index, alias ->
-                insert(UserWidgetEntity(profileKey, alias, index))
+//                insert(UserWidgetEntity(profileKey, alias, index))
             }
         }
     }

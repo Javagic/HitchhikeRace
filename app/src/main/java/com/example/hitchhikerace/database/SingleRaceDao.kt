@@ -12,9 +12,9 @@ interface SingleRaceDao : BaseDao<SingleRaceEntity> {
 
     @Query("SELECT * FROM $TABLE_SINGLE_RACE")
     fun getAll(): Observable<List<SingleRaceEntity>>
-
-    @Query("SELECT * FROM $TABLE_SINGLE_RACE")
-    fun getAllWithPoints(): Observable<List<RaceWithPoints>>
+//
+//    @Query("SELECT * FROM $TABLE_SINGLE_RACE")
+//    fun getAllWithPoints(): Observable<List<RaceWithPoints>>
 
     @Query("DELETE FROM $TABLE_SINGLE_RACE")
     fun clear(): Int

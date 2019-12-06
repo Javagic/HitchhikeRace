@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HitchhikeRace</string>
+
+    <string name="car_start">Посадка</string>
+    <string name="rest_pattern">R %1$s:%2$s/%3$s</string>
+    <string name="edit_ok">Ок</string>
+    <string name="edit_cancel">Отмена</string>
 </resources>

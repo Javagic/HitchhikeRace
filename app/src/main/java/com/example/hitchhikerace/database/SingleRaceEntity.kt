@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.example.hitchhikerace.database.SingleRaceEntity.Companion.TABLE_SINGLE_RACE
 
 @Entity(tableName = TABLE_SINGLE_RACE)
-class SingleRaceEntity(val name: String, dateStart: Long, dateEnd: Long) {
+class SingleRaceEntity(name: String = "", dateStart: Long = -1, dateEnd: Long = -1) {
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
