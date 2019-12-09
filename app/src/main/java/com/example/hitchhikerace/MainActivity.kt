@@ -2,17 +2,16 @@ package com.example.hitchhikerace
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.hitchhikerace.view.MenuScreenFragment
+import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.supportActionBar?.hide()
         setContentView(R.layout.activity_main)
-        val fragment = MenuScreenFragment()
-        supportFragmentManager.beginTransaction()
-            .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-            .add(R.id.mainContainer, fragment)
-            .commit()
     }
+
+    override fun onSupportNavigateUp() = findNavController(R.navigation.navigation).navigateUp()
+
 }

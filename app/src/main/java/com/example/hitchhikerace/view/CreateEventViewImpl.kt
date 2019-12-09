@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.database.hideKeyboard
-import com.example.hitchhikerace.database.showKeyboard
+import com.example.hitchhikerace.database.*
 import kotlinx.android.synthetic.main.screen_create_event.*
 import java.util.*
 import java.util.Calendar.HOUR_OF_DAY
@@ -17,13 +16,16 @@ import java.util.Calendar.MINUTE
 
 class CreateEventViewImpl : Fragment() {
 
+    private val eventType by lazy {
+        arguments?.get("event_type") as RaceEventType
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.screen_create_event, null)
-        return view
+        return inflater.inflate(R.layout.screen_create_event, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,9 +36,23 @@ class CreateEventViewImpl : Fragment() {
         context.showKeyboard()
         etMainText.requestFocus()
         btnCreateEvent.setOnClickListener {
-            activity.hideKeyboard()
-            activity?.onBackPressed()
+            DataBaseInteractorImpl().addEvent(
+                eventType,
+                etMainText.text.toString(),
+                etEventDescription.text.toString(),
+                timePicker.hours.toString(),
+                timePicker.minutes.toString()
+            )
+            close()
         }
+        btnCancel.setOnClickListener {
+            close()
+        }
+    }
+
+    fun close() {
+        activity.hideKeyboard()
+        navController()?.popBackStack()
     }
 
     private var TimePicker.minutes: Int

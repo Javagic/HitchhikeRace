@@ -11,7 +11,8 @@ import androidx.room.RoomDatabase
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun advertisingDao(): SingleRaceDao
-    abstract fun rotatorDao(): RaceEventDao
+
+    abstract fun singleRaceDao(): SingleRaceDao
+    abstract fun raceEventDao(): RaceEventDao
 
 }

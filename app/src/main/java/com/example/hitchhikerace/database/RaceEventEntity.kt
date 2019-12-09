@@ -8,13 +8,13 @@ import com.example.hitchhikerace.database.RaceEventEntity.Companion.TABLE_RACE_E
 
 @Entity(tableName = TABLE_RACE_EVENT)
 @TypeConverters(Converters::class)
-class RaceEventEntity(
+data class RaceEventEntity(
     var raceId: Long = 0,
     val raceEventType: RaceEventType,
     val eventDescription: String,
     val mainText: String,
-    val alias: String,
-    val time: Long,
+    val hour: String,
+    val minute: String,
     val realTime: Long
 ) {
 
