@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import com.example.hitchhikerace.R
@@ -48,6 +49,14 @@ class CreateEventViewImpl : Fragment() {
         btnCancel.setOnClickListener {
             close()
         }
+        val arrayAdapter =
+            ArrayAdapter<String>(
+                view.context,
+                android.R.layout.simple_spinner_item,
+                PreferenceManager().getCrewList()
+            )
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCrew.adapter = arrayAdapter
     }
 
     fun close() {

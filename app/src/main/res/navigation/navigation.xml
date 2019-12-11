@@ -12,6 +12,9 @@
             android:id="@+id/main_to_create_event"
             app:destination="@id/nav_fragment_create_event" />
         <action
+            android:id="@+id/main_to_crew_management"
+            app:destination="@id/nav_fragment_crew_management" />
+        <action
             android:id="@+id/main_to_current_statistic"
             app:destination="@id/nav_fragment_current_statistic" />
     </fragment>
@@ -21,6 +24,12 @@
         android:name="com.example.hitchhikerace.view.CreateEventViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_create_event" />
+
+    <fragment
+        android:id="@+id/nav_fragment_crew_management"
+        android:name="com.example.hitchhikerace.view.CrewManagementViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_crew_managment" />
 
     <fragment
         android:id="@+id/nav_fragment_current_statistic"

@@ -6,4 +6,7 @@
     <string name="edit_ok">Ок</string>
     <string name="edit_cancel">Отмена</string>
     <string name="current_statistics">Текущая статистика</string>
+    <string name="crew_management_title">Управление экипажами</string>
+    <string name="crew_management_description">Введите пожалуйста в поле ввода все позывные экипажей, учавствующих в гонке через пробелы. \n Это позволит быстро выбирать из предложенного списка при внесении событий в хронику. </string>
+    <string name="crew_management_hint">Ввести экипажи…</string>
 </resources>

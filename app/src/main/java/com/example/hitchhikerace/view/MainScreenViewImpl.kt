@@ -29,6 +29,12 @@ class MainScreenViewImpl : Fragment() {
                     bundleOf("event_type" to RaceEventType.CAR_START)
                 )
         }
+        btnCrewManagment.setOnClickListener {
+            view.findNavController()
+                .navigate(
+                    R.id.main_to_crew_management
+                )
+        }
         btnCurrentStatistic.setOnClickListener {
             view.findNavController().navigate(R.id.main_to_current_statistic)
         }

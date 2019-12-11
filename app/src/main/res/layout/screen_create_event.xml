@@ -20,6 +20,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:drawableStart="@drawable/ic_arrow_back"
                 android:text="@string/edit_cancel"
                 app:layout_constraintEnd_toStartOf="@id/btnCreateEvent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:drawableEnd="@drawable/ic_check"
                 android:text="@string/edit_ok"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btnCancel"
@@ -43,25 +45,47 @@
                 app:barrierDirection="bottom"
                 app:constraint_referenced_ids="btnCancel, btnCreateEvent" />
 
-            <EditText
-                android:id="@+id/etMainText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilMainText"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/topBarrier" />
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="25dp"
+                android:hint="@string/app_name"
+                app:layout_constraintTop_toBottomOf="@+id/topBarrier">
+
+                <EditText
+                    android:id="@+id/etMainText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TimePicker
                 android:id="@+id/timePicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:timePickerMode="spinner"
-                app:layout_constraintTop_toBottomOf="@+id/etMainText" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilMainText" />
 
             <EditText
                 android:id="@+id/etEventDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/app_name"
                 app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerCrew"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintTop_toBottomOf="@+id/etEventDescription" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
