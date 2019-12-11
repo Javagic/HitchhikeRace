@@ -22,6 +22,7 @@ class CrewManagementViewImpl : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        etCrew.setText(PreferenceManager().getCrewList().joinToString(" "))
         btnCreateEvent.setOnClickListener {
             PreferenceManager().saveCrewList(etCrew.text.toString())
             close()

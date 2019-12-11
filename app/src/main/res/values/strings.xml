@@ -5,8 +5,10 @@
     <string name="rest_pattern">R %1$s:%2$s/%3$s</string>
     <string name="edit_ok">Ок</string>
     <string name="edit_cancel">Отмена</string>
+    <string name="event_type_car_start">Посадка</string>
     <string name="current_statistics">Текущая статистика</string>
     <string name="crew_management_title">Управление экипажами</string>
     <string name="crew_management_description">Введите пожалуйста в поле ввода все позывные экипажей, учавствующих в гонке через пробелы. \n Это позволит быстро выбирать из предложенного списка при внесении событий в хронику. </string>
     <string name="crew_management_hint">Ввести экипажи…</string>
+    <string name="event_to_string">%1$s\nОписание: %2$s, %3$s : %4$s</string>
 </resources>

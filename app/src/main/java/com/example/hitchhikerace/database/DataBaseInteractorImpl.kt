@@ -34,12 +34,9 @@ class DataBaseInteractorImpl {
             .subscribe({}, {})
     }
 
-    fun getStatistic(): Observable<String> {
+    fun getStatistic(): Observable<List<RaceEventEntity>> {
         return RaceApplication.database.raceEventDao().getAll()
             .subscribeOn(Schedulers.io())
-            .map {
-                it.joinToString("\n") { it.toString() }
-            }
 
     }
 

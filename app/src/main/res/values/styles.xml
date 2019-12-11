@@ -13,9 +13,9 @@
 
     <style name="ButtonText" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/white</item>
-        <item name="android:padding">20dp</item>
+        <item name="android:padding">15dp</item>
         <item name="android:textSize">25sp</item>
-        <item name="android:background">@drawable/background_button_default</item><!-- only way to change this is to change the src image -->
+        <item name="android:background">@drawable/background_button_ripple</item>
     </style>
 
     <style name="TextView" parent="@android:style/Widget.TextView">

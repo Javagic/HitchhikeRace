@@ -26,8 +26,10 @@ class CurrentStatisticViewImpl : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         DataBaseInteractorImpl().getStatistic()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                tvStatistic.text = it
+            .subscribe({ list ->
+                view.context?.let {
+                    tvStatistic.text = EventTypeMapper().mapEventEntity(it, list)
+                }
             }, {})
             .let { disposable.add(it) }
     }
