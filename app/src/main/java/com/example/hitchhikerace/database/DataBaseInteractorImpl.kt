@@ -11,8 +11,8 @@ import io.reactivex.schedulers.Schedulers
 class DataBaseInteractorImpl {
 
     @SuppressLint("CheckResult")
-    fun addEvent(eventViewModel: RaceEventViewModel) {
-        Completable.fromCallable {
+    fun addEvent(eventViewModel: RaceEventViewModel): Completable {
+        return Completable.fromCallable {
             RaceApplication.database.raceEventDao()
                 .insert(
                     RaceEventEntity(
@@ -30,13 +30,11 @@ class DataBaseInteractorImpl {
                 )
         }
             .subscribeOn(Schedulers.io())
-            .subscribe({}, {})
     }
 
-    fun getStatistic(): Observable<List<RaceEventEntity>> {
+    fun getAllRaceEventList(): Observable<List<RaceEventEntity>> {
         return RaceApplication.database.raceEventDao().getAll()
             .subscribeOn(Schedulers.io())
-
     }
 
 }

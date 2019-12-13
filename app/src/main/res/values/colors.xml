@@ -6,6 +6,6 @@
     <color name="main_background">#FDD835</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="default_red">#000000</color>
+    <color name="default_red">#D50000</color>
     <color name="default_button_color">#01579B</color>
 </resources>

@@ -10,6 +10,7 @@ import com.example.hitchhikerace.database.DataBaseInteractorImpl
 import com.example.hitchhikerace.database.RaceEventType
 import com.example.hitchhikerace.database.hideKeyboard
 import com.example.hitchhikerace.database.navController
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.screen_base_event.*
 
 class CreateBaseEventViewImpl : Fragment() {
@@ -24,7 +25,6 @@ class CreateBaseEventViewImpl : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.screen_base_event, container, false)
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val childFragment = EventTypeMapper().getFeatureRaceEventFragment(view.context, eventType)
@@ -33,7 +33,8 @@ class CreateBaseEventViewImpl : Fragment() {
         tvEventTitle.text = getString(childFragment.getEventTitle())
         btnCreateEvent.setOnClickListener {
             DataBaseInteractorImpl().addEvent(childFragment.createRaceEventViewModel())
-            close()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::close) {}
         }
         btnCancel.setOnClickListener {
             close()

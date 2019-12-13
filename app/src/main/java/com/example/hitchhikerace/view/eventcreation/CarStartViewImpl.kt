@@ -3,24 +3,28 @@ package com.example.hitchhikerace.view.eventcreation
 import android.Manifest
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import com.example.hitchhikerace.R
 import com.example.hitchhikerace.database.RaceEventType
 import com.example.hitchhikerace.database.showKeyboard
 import com.example.hitchhikerace.view.BaseRaceEventCreatorView
-import com.example.hitchhikerace.view.PreferenceManager
 import com.example.hitchhikerace.view.RaceEventViewModel
 import kotlinx.android.synthetic.main.screen_car_start.*
 
 class CarStartViewImpl : BaseRaceEventCreatorView() {
+
+    private val isStart by lazy {
+        arguments?.get("start") == "start"
+    }
+
     override fun getLayoutId() = R.layout.screen_car_start
 
-    override fun getEventTitle() = R.string.car_start
+    override fun getEventTitle() =
+        if (isStart) R.string.car_start_title else R.string.car_finish_title
 
     override fun createRaceEventViewModel(): RaceEventViewModel {
         val location = getCurrentLocation()
         return RaceEventViewModel(
-            RaceEventType.CAR_START,
+            if (isStart) RaceEventType.CAR_START else RaceEventType.CAR_FINISH,
             etMainText.text.toString(),
             etEventDescription.text.toString(),
             timePicker.hours.toString(),
@@ -34,14 +38,7 @@ class CarStartViewImpl : BaseRaceEventCreatorView() {
         timePicker.init()
         context.showKeyboard()
         etMainText.requestFocus()
-        val arrayAdapter =
-            ArrayAdapter<String>(
-                view.context,
-                android.R.layout.simple_spinner_item,
-                PreferenceManager().getCrewList()
-            )
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerCrew.adapter = arrayAdapter
+        tvMainTextTitle.text = view.context.getString(R.string.car_finish_hint)
     }
 
     companion object {

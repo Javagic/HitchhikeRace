@@ -1,17 +1,33 @@
 <resources>
     <string name="app_name">HitchhikeRace</string>
 
-    <string name="car_start">Посадка</string>
+    <string name="car_start_title">Посадка</string>
+    <string name="car_finish_title">Высадка</string>
+    <string name="car_finish_hint">Введите место высадки:</string>
     <string name="rest_pattern">R %1$d:%2$d/%3$d</string>
     <string name="edit_ok">Ок</string>
     <string name="edit_cancel">Отмена</string>
     <string name="event_type_car_start">Посадка</string>
+    <string name="other">Иное</string>
+    <string name="take_checkpoint">Взятие КП</string>
     <string name="current_statistics">Текущая статистика</string>
+    <string name="legend_title">Легенда</string>
+    <string name="description_hint">Введите дополнительные подробности</string>
+    <string name="car_main_text_hint">Введите марку и модель автомобиля:</string>
+    <string name="rest_warning">Рест взят!</string>
     <string name="time_race_start">Введите время начала гонки</string>
     <string name="race_start_title">Начало гонки</string>
+    <string name="race_finish_title">Финиш гонки</string>
+    <string name="run_start">Начало бега</string>
+    <string name="run_finish">Завершение бега</string>
+    <string name="rest">Рест</string>
+    <string name="rest_start">Рест начало</string>
+    <string name="rest_finish">Рест конец</string>
+    <string name="orientation_start">Начало ориентирования</string>
+    <string name="orientation_finish">Завершение ориентирования</string>
     <string name="time_race_start_rest">Введите (час минуты делимость) реста через пробелы</string>
     <string name="crew_management_title">Управление экипажами</string>
-    <string name="crew_management_description">Введите пожалуйста в поле ввода все позывные экипажей, учавствующих в гонке через пробелы. \n Это позволит быстро выбирать из предложенного списка при внесении событий в хронику. </string>
+    <string name="crew_management_description">Введите в поле ввода все позывные экипажей, учавствующих в гонке через пробелы. \n Это позволит быстро выбирать из предложенного списка при внесении событий в хронику. </string>
     <string name="crew_management_hint">Ввести экипажи…</string>
     <string name="event_to_string">%1$s\nОписание: %2$s, %3$s : %4$s</string>
     <string name="need_permission">Для сбора полной статистики гонки необходимо дать разрешения:</string>

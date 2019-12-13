@@ -24,7 +24,7 @@ class CurrentStatisticViewImpl : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        DataBaseInteractorImpl().getStatistic()
+        DataBaseInteractorImpl().getAllRaceEventList()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->
                 view.context?.let {
