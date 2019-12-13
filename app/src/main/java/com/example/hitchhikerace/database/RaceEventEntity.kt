@@ -15,7 +15,10 @@ data class RaceEventEntity(
     val mainText: String,
     val hour: String,
     val minute: String,
-    val realTime: Long
+    val realTime: Long,
+    val latitude: Double,
+    val longitude: Double,
+    val currentRest: String
 ) {
 
     @PrimaryKey(autoGenerate = true)

@@ -21,9 +21,9 @@
 
     <fragment
         android:id="@+id/nav_fragment_create_event"
-        android:name="com.example.hitchhikerace.view.CreateEventViewImpl"
+        android:name="com.example.hitchhikerace.view.CreateBaseEventViewImpl"
         android:label="fragment_match"
-        tools:layout="@layout/screen_create_event" />
+        tools:layout="@layout/screen_car_start" />
 
     <fragment
         android:id="@+id/nav_fragment_crew_management"

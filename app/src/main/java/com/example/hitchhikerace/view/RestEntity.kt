@@ -1,0 +1,9 @@
+package com.example.hitchhikerace.view
+
+class RestEntity(val hour: Int = 0, val minute: Int = 0, val partitions: Int = 0) {
+    override fun toString(): String {
+        return "$hour $minute $partitions"
+    }
+
+    constructor(str: List<String>) : this(str[0].toInt(), str[1].toInt(), str[2].toInt())
+}

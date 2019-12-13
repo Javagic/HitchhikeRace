@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:orientation="vertical"
+    tools:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvEventTitle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/navbar_height"
+        android:background="@color/colorPrimaryDark"
+        android:paddingStart="15dp"
+        android:paddingEnd="5dp"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Event Title" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:drawableStart="@drawable/ic_arrow_back"
+        android:text="@string/edit_cancel"
+        app:layout_constraintEnd_toStartOf="@id/btnCreateEvent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventTitle" />
+
+    <Button
+        android:id="@+id/btnCreateEvent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:drawableEnd="@drawable/ic_check"
+        android:text="@string/edit_ok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnCancel"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventTitle" />
+
+    <FrameLayout
+        android:id="@+id/eventFeatureContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCancel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,17 @@
 package com.example.hitchhikerace.database
 
 enum class RaceEventType {
-    START,
-    FINISH,
+    RACE_START,
+    RACE_FINISH,
     CAR_START,
     CAR_FINISH,
-    RUN,
-    ORIENTATION,
+    RUN_START,
+    RUN_FINISH,
+    ORIENTATION_START,
+    ORIENTATION_FINISH,
     TEAM_MEATING,
     REST_START,
     REST_FINISH,
-    ESCAPE,
-    CHECKPOINT,
+    TAKE_CHECKPOINT,
     CUSTOM;
 }
