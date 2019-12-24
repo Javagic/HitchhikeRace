@@ -2,24 +2,22 @@ package com.example.hitchhikerace.view.eventcreation
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.database.RaceEventType
-import com.example.hitchhikerace.view.BaseRaceEventCreatorView
+import com.example.hitchhikerace.data.database.RaceEventEntity
+import com.example.hitchhikerace.data.database.RaceEventType
+import com.example.hitchhikerace.view.BaseRaceEventView
 import com.example.hitchhikerace.view.RaceEventViewModel
 import kotlinx.android.synthetic.main.screen_rest_start.*
 
-class RestStartViewImpl : BaseRaceEventCreatorView() {
-
-    private val isStart by lazy {
-        arguments?.get("start") == "start"
-    }
+class RestStartViewImpl : BaseRaceEventView() {
 
     override fun createRaceEventViewModel(): RaceEventViewModel {
-        if (!isStart) {
-        }
+
         return RaceEventViewModel(
             if (isStart) RaceEventType.REST_START else RaceEventType.REST_FINISH,
             if (isStart) getString(R.string.rest_start) else getString(R.string.rest_finish),
+            "",
             "",
             timePicker.hours.toString(),
             timePicker.minutes.toString(),
@@ -36,7 +34,17 @@ class RestStartViewImpl : BaseRaceEventCreatorView() {
         timePicker.init()
         tvTimeTitle.text =
             if (isStart) getString(R.string.time_rest_start) else getString(R.string.time_rest_finish)
-
+        raceEvent?.run {
+            timePicker.hours = hour.toInt()
+            timePicker.minutes = minute.toInt()
+        }
     }
 
+    companion object {
+        fun instance(raceEntity: RaceEventEntity?, isStart: Boolean): RestStartViewImpl {
+            return RestStartViewImpl().apply {
+                arguments = bundleOf("start" to isStart, "raceEvent" to raceEntity)
+            }
+        }
+    }
 }

@@ -1,105 +1,120 @@
 package com.example.hitchhikerace.view
 
-import android.Manifest
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.database.*
+import com.example.hitchhikerace.app.RaceApplication
+import com.example.hitchhikerace.data.database.RaceEventEntity
+import com.example.hitchhikerace.domain.RaceEventInteractor
+import com.example.hitchhikerace.data.database.RaceEventType
+import com.example.hitchhikerace.utils.navigateOnClick
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.screen_main.*
-import pub.devrel.easypermissions.EasyPermissions
+import kotlinx.android.synthetic.main.screen_events_main.*
+import javax.inject.Inject
 
-class MainScreenViewImpl : Fragment() {
+//TODO rename
+class MainScreenViewImpl : BaseFragment() {
+
+    @Inject
+    lateinit var eventInteractor: RaceEventInteractor
+
+    @Inject
+    lateinit var preferenceManager: PreferenceManager
 
     private val disposable = CompositeDisposable()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_main, container, false)
+    override fun getLayoutId(): Int = R.layout.screen_events_main
+
+    override fun close() {
+        activity?.finish()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        DataBaseInteractorImpl().getAllRaceEventList()
+    override fun initView(view: View, savedInstanceState: Bundle?) {
+        RaceApplication.appComponent.inject(this)
+        eventInteractor.getAllRaceEventList(PreferenceManager().getCurrentRace())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe { eventList ->
                 btnRaceStart.initToggleButton(
                     RaceEventType.RACE_START,
                     RaceEventType.RACE_FINISH,
                     getString(R.string.race_start_title),
                     getString(R.string.race_finish_title),
-                    it,
+                    eventList,
                     R.drawable.background_button_event_active,
                     R.drawable.background_button_event_green
                 )
+                if (eventList.isEmpty()) {
+                    btnCarStart.background = ContextCompat.getDrawable(
+                        btnCarStart.context,
+                        R.drawable.background_button_disabled
+                    )
+                    btnRest.background = ContextCompat.getDrawable(
+                        btnCarStart.context,
+                        R.drawable.background_button_disabled
+                    )
+                    btnOrientation.background = ContextCompat.getDrawable(
+                        btnCarStart.context,
+                        R.drawable.background_button_disabled
+                    )
+                    btnRun.background = ContextCompat.getDrawable(
+                        btnCarStart.context,
+                        R.drawable.background_button_disabled
+                    )
+                    btnMeeting.background = ContextCompat.getDrawable(
+                        btnCarStart.context,
+                        R.drawable.background_button_disabled
+                    )
+                    btnTakeCheckpoint.background = ContextCompat.getDrawable(
+                        btnCarStart.context,
+                        R.drawable.background_button_disabled
+                    )
+                    btnOther.background = ContextCompat.getDrawable(
+                        btnCarStart.context,
+                        R.drawable.background_button_disabled
+                    )
+                    return@subscribe
+                }
                 btnCarStart.initToggleButton(
                     RaceEventType.CAR_START,
                     RaceEventType.CAR_FINISH,
                     getString(R.string.car_start_title),
                     getString(R.string.car_finish_title),
-                    it
+                    eventList
                 )
                 btnRest.initToggleButton(
                     RaceEventType.REST_START,
                     RaceEventType.REST_FINISH,
                     getString(R.string.rest_start),
                     getString(R.string.rest_finish),
-                    it
+                    eventList
                 )
                 btnOrientation.initToggleButton(
                     RaceEventType.ORIENTATION_START,
                     RaceEventType.ORIENTATION_FINISH,
                     getString(R.string.orientation_start),
                     getString(R.string.orientation_finish),
-                    it
+                    eventList
                 )
                 btnRun.initToggleButton(
                     RaceEventType.RUN_START,
                     RaceEventType.RUN_FINISH,
                     getString(R.string.run_start),
                     getString(R.string.run_finish),
-                    it
+                    eventList
                 )
-
+                btnMeeting.navigateOnClickToCreation(RaceEventType.CREW_MEETING)
+                btnTakeCheckpoint.navigateOnClickToCreation(RaceEventType.TAKE_CHECKPOINT)
+                btnOther.navigateOnClickToCreation(RaceEventType.CUSTOM)
             }
             .addTo(disposable)
-
-        btnMeeting.setOnClickListener {
-            navController()?.navCreationFragment(bundleOf("event_type" to RaceEventType.CREW_MEATING))
-        }
-        btnTakeCheckpoint.setOnClickListener {
-            navController()?.navCreationFragment(bundleOf("event_type" to RaceEventType.TAKE_CHECKPOINT))
-        }
-        btnOther.setOnClickListener {
-            navController()?.navCreationFragment(bundleOf("event_type" to RaceEventType.CUSTOM))
-        }
-        btnCrewManagment.setOnClickListener {
-            view.findNavController()
-                .navigate(
-                    R.id.main_to_crew_management
-                )
-        }
-        btnCurrentStatistic.setOnClickListener {
-            view.findNavController().navigate(R.id.main_to_current_statistic)
-        }
-        btnLegend.setOnClickListener {
-            view.findNavController().navigate(R.id.main_to_legend)
-        }
+        btnSettings.navigateOnClick(R.id.main_to_settings)
         tvCurrentRest.text = restString()
-        requestLocationPermission(LOCATION_PERMISSION_REQUEST_CODE)
         //TODO посчитать километраж гонки и пешком
     }
 
@@ -118,9 +133,7 @@ class MainScreenViewImpl : Fragment() {
                 startDrawable
             )
             text = startTitle
-            setOnClickListener {
-                navController()?.navCreationFragment(bundleOf("event_type" to startEvent))
-            }
+            navigateOnClickToCreation(startEvent)
             return true
         } else {
             background = ContextCompat.getDrawable(
@@ -128,9 +141,7 @@ class MainScreenViewImpl : Fragment() {
                 finishDrawable
             )
             text = finishTitle
-            setOnClickListener {
-                navController()?.navCreationFragment(bundleOf("event_type" to finishEvent))
-            }
+            navigateOnClickToCreation(finishEvent)
             return false
         }
     }
@@ -139,41 +150,15 @@ class MainScreenViewImpl : Fragment() {
         getString(R.string.rest_pattern, hour, minute, partitions)
     }
 
-    private fun requestLocationPermission(requestCode: Int) = requestPermissions(
-        listOf(PERMISSION_COARSE_LOCATION, PERMISSION_FINE_LOCATION),
-        R.string.need_permission,
-        requestCode
-    )
-
-    private fun requestPermissions(
-        permissions: List<String>,
-        @StringRes rationale: Int,
-        requestCode: Int
-    ) = context?.run {
-        if (!hasPermissions(permissions)) {
-            EasyPermissions.requestPermissions(
-                this@MainScreenViewImpl,
-                this.getString(rationale),
-                requestCode,
-                *permissions.toTypedArray()
-            )
-        }
-    }
-
-    private fun Context.hasPermissions(permissions: List<String>): Boolean =
-        EasyPermissions.hasPermissions(
-            this,
-            *permissions.toTypedArray()
-        )
-
-    companion object {
-        const val PERMISSION_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION
-        const val PERMISSION_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
-        const val LOCATION_PERMISSION_REQUEST_CODE = 1
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         disposable.clear()
     }
+
+    private fun Button.navigateOnClickToCreation(type: RaceEventType) {
+        setOnClickListener {
+            findNavController().navigate(R.id.main_to_create_event, bundleOf("event_type" to type))
+        }
+    }
+
 }

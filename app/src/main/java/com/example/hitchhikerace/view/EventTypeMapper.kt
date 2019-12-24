@@ -2,22 +2,22 @@ package com.example.hitchhikerace.view
 
 import android.content.Context
 import android.location.Location
-import androidx.core.os.bundleOf
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.database.RaceEventEntity
-import com.example.hitchhikerace.database.RaceEventType
-import com.example.hitchhikerace.database.SHIFT
-import com.example.hitchhikerace.tryOrNull
+import com.example.hitchhikerace.data.database.RaceEventEntity
+import com.example.hitchhikerace.data.database.RaceEventType
+import com.example.hitchhikerace.utils.SHIFT
+import com.example.hitchhikerace.utils.tryOrNull
 import com.example.hitchhikerace.view.eventcreation.*
 
 class EventTypeMapper {
     var i = 1
     fun mapEventEntity(context: Context, list: List<RaceEventEntity>): String {
         val result = list.joinToString("\n") {
-            context.eventToString(it)
+            eventToString(context, it)
         }
         val dt = tryOrNull {
-            return@tryOrNull SHIFT + "Пройдено пешком " + "690м."
+            ""
+//            return@tryOrNull SHIFT + "Пройдено пешком " + "690м."
         }
         return result + (dt ?: "")
 
@@ -39,13 +39,13 @@ class EventTypeMapper {
         }
     }
 
-    fun Context.additionalInfo(eventType: RaceEventEntity): String {
+    private fun additionalInfo(eventType: RaceEventEntity): String {
         return if (eventType.eventDescription.isNotEmpty()) {
             "$SHIFT ${eventType.eventDescription}"
         } else ""
     }
 
-    fun Context.eventToString(eventType: RaceEventEntity): String {
+    fun eventToString(context: Context, eventType: RaceEventEntity): String = context.run {
         if (eventType.raceEventType == RaceEventType.RACE_START) {
             return "Старт " + eventType.timeString + SHIFT + restString(eventType)
         }
@@ -72,7 +72,7 @@ class EventTypeMapper {
         if (eventType.raceEventType == RaceEventType.REST_FINISH) {
             return "Рест снят " + eventType.timeString + SHIFT + restString(eventType)
         }
-        if (eventType.raceEventType == RaceEventType.CREW_MEATING) {
+        if (eventType.raceEventType == RaceEventType.CREW_MEETING) {
             return "Экипаж " + eventType.mainText + " " + eventType.timeString
         }
         return if (eventType.raceEventType == RaceEventType.RACE_FINISH) {
@@ -88,31 +88,22 @@ class EventTypeMapper {
 
     fun getFeatureRaceEventFragment(
         context: Context,
-        type: RaceEventType
-    ): BaseRaceEventCreatorView = when (type) {
-        RaceEventType.RACE_START -> RaceStartViewImpl().apply {
-            arguments = bundleOf("start" to "start")
-        }
-        RaceEventType.RACE_FINISH -> RaceStartViewImpl()
-        RaceEventType.CAR_START -> CarStartViewImpl().apply {
-            arguments = bundleOf("start" to "start")
-        }
-        RaceEventType.CAR_FINISH -> CarStartViewImpl()
-        RaceEventType.RUN_START -> RunStartViewImpl().apply {
-            arguments = bundleOf("start" to "start")
-        }
-        RaceEventType.RUN_FINISH -> RunStartViewImpl()
-        RaceEventType.ORIENTATION_START -> OrientationStartViewImpl().apply {
-            arguments = bundleOf("start" to "start")
-        }
-        RaceEventType.ORIENTATION_FINISH -> OrientationStartViewImpl()
-        RaceEventType.CREW_MEATING -> CrewMeatingViewImpl()
-        RaceEventType.REST_START -> RestStartViewImpl().apply {
-            arguments = bundleOf("start" to "start")
-        }
-        RaceEventType.REST_FINISH -> RestStartViewImpl()
-        RaceEventType.TAKE_CHECKPOINT -> TakeCheckPointViewImpl()
-        RaceEventType.CUSTOM -> OtherViewImpl()
+        type: RaceEventType,
+        event: RaceEventEntity?
+    ): BaseRaceEventView = when (type) {
+        RaceEventType.RACE_START -> RaceStartViewImpl.instance(event, true)
+        RaceEventType.RACE_FINISH -> RaceStartViewImpl.instance(event, false)
+        RaceEventType.CAR_START -> CarStartViewImpl.instance(event, true)
+        RaceEventType.CAR_FINISH -> CarStartViewImpl.instance(event, false)
+        RaceEventType.RUN_START -> RunStartViewImpl.instance(event, true)
+        RaceEventType.RUN_FINISH -> RunStartViewImpl.instance(event, false)
+        RaceEventType.ORIENTATION_START -> OrientationStartViewImpl.instance(event, true)
+        RaceEventType.ORIENTATION_FINISH -> OrientationStartViewImpl.instance(event, false)
+        RaceEventType.CREW_MEETING -> CrewMeetingViewImpl.instance(event)
+        RaceEventType.REST_START -> RestStartViewImpl.instance(event, true)
+        RaceEventType.REST_FINISH -> RestStartViewImpl.instance(event, false)
+        RaceEventType.TAKE_CHECKPOINT -> TakeCheckPointViewImpl.instance(event)
+        RaceEventType.CUSTOM -> OtherViewImpl.instance(event)
     }
 
     fun getEventTypeTitle(context: Context, type: RaceEventType) = when (type) {
@@ -124,7 +115,7 @@ class EventTypeMapper {
         RaceEventType.RUN_FINISH -> context.getString(R.string.run_finish)
         RaceEventType.ORIENTATION_START -> context.getString(R.string.orientation_start)
         RaceEventType.ORIENTATION_FINISH -> context.getString(R.string.orientation_finish)
-        RaceEventType.CREW_MEATING -> context.getString(R.string.event_type_car_start)
+        RaceEventType.CREW_MEETING -> context.getString(R.string.event_type_car_start)
         RaceEventType.REST_START -> context.getString(R.string.rest_start)
         RaceEventType.REST_FINISH -> context.getString(R.string.rest_finish)
         RaceEventType.TAKE_CHECKPOINT -> context.getString(R.string.take_checkpoint)

@@ -45,8 +45,34 @@
         android:id="@+id/etCrew"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_screen_offset"
+        android:layout_marginEnd="@dimen/default_screen_offset"
         android:hint="@string/crew_management_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCrewDescription" />
+
+    <TextView
+        android:id="@+id/tvCheckPointDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_screen_offset"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/default_screen_offset"
+        android:text="@string/checkpoint_management_description"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCrew" />
+
+    <EditText
+        android:id="@+id/etCheckPoint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_screen_offset"
+        android:layout_marginEnd="@dimen/default_screen_offset"
+        android:hint="@string/checkpoint_management_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCheckPointDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

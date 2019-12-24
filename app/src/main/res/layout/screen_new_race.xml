@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvScreenTitle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/navbar_height"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:paddingEnd="5dp"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Event Title" />
+
+    <Button
+        android:id="@+id/btnCancelNewRace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:drawableStart="@drawable/ic_arrow_back"
+        android:text="@string/edit_cancel"
+        app:layout_constraintEnd_toStartOf="@id/btnCreateNewRace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvScreenTitle" />
+
+    <Button
+        android:id="@+id/btnCreateNewRace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:drawableEnd="@drawable/ic_check"
+        android:text="@string/edit_ok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnCancelNewRace"
+        app:layout_constraintTop_toBottomOf="@+id/tvScreenTitle" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/main_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCreateNewRace"
+        app:layout_constraintVertical_bias="0"
+        tools:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCreateNewRaceTitle"
+                style="@style/TextViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/hint_new_race_title"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/etRaceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_screen_offset"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/default_screen_offset"
+                app:layout_constraintTop_toBottomOf="@+id/tvCreateNewRaceTitle" />
+
+            <TextView
+                android:id="@+id/tvRaceStartDateTitle"
+                style="@style/TextViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date_race_start"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etRaceTitle" />
+
+            <EditText
+                android:id="@+id/etRaceStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_screen_offset"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/default_screen_offset"
+                android:focusableInTouchMode="false"
+                app:layout_constraintTop_toBottomOf="@+id/tvRaceStartDateTitle" />
+
+            <TextView
+                android:id="@+id/tvRaceEndDateTitle"
+                style="@style/TextViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date_race_end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etRaceStartDate" />
+
+            <EditText
+                android:id="@+id/etRaceEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_screen_offset"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/default_screen_offset"
+                android:focusableInTouchMode="false"
+                android:paddingBottom="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvRaceEndDateTitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

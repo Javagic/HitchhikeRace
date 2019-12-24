@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu_navigation"
+    app:startDestination="@+id/nav_fragment_main">
+
+    <fragment
+        android:id="@+id/nav_fragment_main"
+        android:name="com.example.hitchhikerace.view.MainMenuViewImpl"
+        tools:layout="@layout/screen_main_menu">
+        <action
+            android:id="@+id/main_menu_to_create_new_race"
+            app:destination="@id/nav_fragment_create_new_race" />
+        <action
+            android:id="@+id/main_menu_to_races_history"
+            app:destination="@id/nav_fragment_races_history" />
+
+        <action
+            android:id="@+id/main_to_events_screen"
+            app:destination="@id/nav_fragment_events_screen"
+            app:popUpTo="@+id/nav_fragment_main" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fragment_create_new_race"
+        android:name="com.example.hitchhikerace.view.eventcreation.CreateNewRaceViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_new_race">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fragment_races_history"
+        android:name="com.example.hitchhikerace.view.raceshistory.RacesHistoryViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_races_history">
+
+        <action
+            android:id="@+id/races_history_to_race_info"
+            app:destination="@id/nav_fragment_race_info" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fragment_race_info"
+        android:name="com.example.hitchhikerace.view.raceinfo.SingleRaceInfoViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_race_info">
+        <action
+            android:id="@+id/race_info_to_create_event"
+            app:destination="@id/nav_fragment_create_event" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fragment_create_event"
+        android:name="com.example.hitchhikerace.view.CreateBaseEventViewImpl"
+        android:label="fragment_match"
+        tools:layout="@layout/screen_car_start" />
+</navigation>
