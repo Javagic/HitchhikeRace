@@ -1,4 +1,4 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.data.pojo
 
 class RestEntity(val hour: Int = 0, val minute: Int = 0, val partitions: Int = 0) {
 

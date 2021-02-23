@@ -1,7 +1,8 @@
-package com.example.hitchhikerace.data.database
+package com.example.hitchhikerace.data.database.entity
 
 import android.os.Parcelable
 import androidx.room.*
+import com.example.hitchhikerace.data.pojo.RaceEventType
 import kotlinx.android.parcel.Parcelize
 
 const val TABLE_RACE_EVENT = "table_race_event"

@@ -1,4 +1,4 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.view.fragments
 
 import android.Manifest
 import android.os.Bundle
@@ -7,6 +7,7 @@ import com.example.hitchhikerace.R
 import com.example.hitchhikerace.utils.navigate
 import com.example.hitchhikerace.utils.navigateWithTitle
 import com.example.hitchhikerace.utils.requestUserPermissions
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.screen_main_menu.*
 

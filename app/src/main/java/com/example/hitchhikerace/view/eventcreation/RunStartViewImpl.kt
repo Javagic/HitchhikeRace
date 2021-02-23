@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.data.database.RaceEventEntity
-import com.example.hitchhikerace.data.database.RaceEventType
-import com.example.hitchhikerace.view.BaseRaceEventView
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
+import com.example.hitchhikerace.data.pojo.RaceEventType
+import com.example.hitchhikerace.view.fragments.base.BaseRaceEventView
 import com.example.hitchhikerace.view.RaceEventViewModel
 import kotlinx.android.synthetic.main.screen_run_start_finish.*
 

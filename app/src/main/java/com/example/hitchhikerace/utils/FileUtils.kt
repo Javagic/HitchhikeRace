@@ -1,7 +1,7 @@
 package com.example.hitchhikerace.utils
 
 import android.content.Context
-import com.example.hitchhikerace.data.database.RaceEventEntity
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
 import com.example.hitchhikerace.library.simpleKML.Serializer
 import com.example.hitchhikerace.library.simpleKML.model.Coordinate
 import com.example.hitchhikerace.library.simpleKML.model.Kml

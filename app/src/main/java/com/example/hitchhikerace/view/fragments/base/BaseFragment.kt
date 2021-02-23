@@ -1,4 +1,4 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.view.fragments.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

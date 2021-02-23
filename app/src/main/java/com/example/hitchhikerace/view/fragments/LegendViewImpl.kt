@@ -1,8 +1,9 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.view.fragments
 
 import android.os.Bundle
 import android.view.View
 import com.example.hitchhikerace.R
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
 import kotlinx.android.synthetic.main.screen_current_statistic.*
 
 class LegendViewImpl : BaseFragment() {

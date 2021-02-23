@@ -1,6 +1,6 @@
 package com.example.hitchhikerace.domain
 
-import com.example.hitchhikerace.data.database.SingleRaceEntity
+import com.example.hitchhikerace.data.database.entity.SingleRaceEntity
 import io.reactivex.Observable
 import io.reactivex.Single
 

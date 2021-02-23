@@ -1,4 +1,4 @@
-package com.example.hitchhikerace.data.database
+package com.example.hitchhikerace.data.pojo
 
 enum class RaceEventType {
     RACE_START,

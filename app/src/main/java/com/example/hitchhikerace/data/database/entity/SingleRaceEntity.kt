@@ -1,8 +1,8 @@
-package com.example.hitchhikerace.data.database
+package com.example.hitchhikerace.data.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.hitchhikerace.data.database.SingleRaceEntity.Companion.TABLE_SINGLE_RACE
+import com.example.hitchhikerace.data.database.entity.SingleRaceEntity.Companion.TABLE_SINGLE_RACE
 
 @Entity(tableName = TABLE_SINGLE_RACE)
 class SingleRaceEntity(

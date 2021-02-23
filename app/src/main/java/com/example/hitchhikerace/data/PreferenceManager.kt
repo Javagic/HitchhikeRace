@@ -1,8 +1,9 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.data
 
 import android.content.Context
 import androidx.core.content.edit
 import com.example.hitchhikerace.app.RaceApplication
+import com.example.hitchhikerace.data.pojo.RestEntity
 import com.example.hitchhikerace.di.PerApplication
 import com.example.hitchhikerace.utils.tryOrNull
 import java.util.*

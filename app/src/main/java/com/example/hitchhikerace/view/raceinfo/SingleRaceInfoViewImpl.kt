@@ -10,7 +10,7 @@ import com.example.hitchhikerace.R
 import com.example.hitchhikerace.app.RaceApplication
 import com.example.hitchhikerace.domain.RaceEventInteractor
 import com.example.hitchhikerace.utils.subscribeWithErrorLogConsumer
-import com.example.hitchhikerace.view.BaseFragment
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.screen_race_info.*
 import javax.inject.Inject

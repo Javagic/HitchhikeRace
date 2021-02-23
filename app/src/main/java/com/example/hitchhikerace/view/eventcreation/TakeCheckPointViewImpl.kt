@@ -7,11 +7,11 @@ import android.widget.TimePicker
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.core.os.bundleOf
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.data.database.RaceEventEntity
-import com.example.hitchhikerace.data.database.RaceEventType
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
+import com.example.hitchhikerace.data.pojo.RaceEventType
 import com.example.hitchhikerace.utils.SHIFT
-import com.example.hitchhikerace.view.BaseRaceEventView
-import com.example.hitchhikerace.view.PreferenceManager
+import com.example.hitchhikerace.view.fragments.base.BaseRaceEventView
+import com.example.hitchhikerace.data.PreferenceManager
 import com.example.hitchhikerace.view.RaceEventViewModel
 import kotlinx.android.synthetic.main.screen_take_checkpoint.*
 

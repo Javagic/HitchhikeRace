@@ -1,29 +1,30 @@
 package com.example.hitchhikerace.domain
 
-import android.annotation.SuppressLint
 import com.example.hitchhikerace.data.database.AppDatabase
-import com.example.hitchhikerace.data.database.SingleRaceEntity
+import com.example.hitchhikerace.data.database.entity.SingleRaceEntity
+import com.example.hitchhikerace.di.qualifiers.IO
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class SingleRaceInteractorImpl @Inject constructor(private val database: AppDatabase) :
-    SingleRaceInteractor {
+class SingleRaceInteractorImpl @Inject constructor(
+    private val database: AppDatabase,
+    @IO private val ioScheduler: Scheduler
+) : SingleRaceInteractor {
 
-    @SuppressLint("CheckResult")
     override fun addSingleRace(newRace: SingleRaceEntity): Single<Long> {
         return Single.fromCallable {
             database.singleRaceDao()
                 .insert(newRace)
         }
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(ioScheduler)
     }
 
     override fun getAll(): Observable<List<SingleRaceEntity>> {
         return database.singleRaceDao()
             .getAll()
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(ioScheduler)
     }
 
 }

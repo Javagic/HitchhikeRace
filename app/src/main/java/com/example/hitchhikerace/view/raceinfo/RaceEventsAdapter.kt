@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.data.database.RaceEventEntity
-import com.example.hitchhikerace.view.EventTypeMapper
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
+import com.example.hitchhikerace.domain.EventTypeMapper
 import kotlinx.android.synthetic.main.item_race_event.view.*
 
 class RaceEventsAdapter(private val onRaceClick: (RaceEventEntity) -> Unit) :

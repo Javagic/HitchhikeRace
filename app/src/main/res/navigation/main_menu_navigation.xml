@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_main"
-        android:name="com.example.hitchhikerace.view.MainMenuViewImpl"
+        android:name="com.example.hitchhikerace.view.fragments.MainMenuViewImpl"
         tools:layout="@layout/screen_main_menu">
         <action
             android:id="@+id/main_menu_to_create_new_race"
@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_create_event"
-        android:name="com.example.hitchhikerace.view.CreateBaseEventViewImpl"
+        android:name="com.example.hitchhikerace.view.fragments.CreateBaseEventViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_car_start" />
 </navigation>

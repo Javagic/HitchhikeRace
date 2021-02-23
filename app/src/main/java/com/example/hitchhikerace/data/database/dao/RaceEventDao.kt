@@ -1,6 +1,8 @@
-package com.example.hitchhikerace.data.database
+package com.example.hitchhikerace.data.database.dao
 
 import androidx.room.*
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
+import com.example.hitchhikerace.data.database.entity.TABLE_RACE_EVENT
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -17,15 +19,15 @@ interface RaceEventDao {
     fun clear(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(obj: RaceEventEntity): Long
+    fun insert(value: RaceEventEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(obj: List<RaceEventEntity>): Array<Long>
+    fun insert(value: List<RaceEventEntity>): Array<Long>
 
     @Delete
-    fun delete(obj: RaceEventEntity)
+    fun delete(value: RaceEventEntity)
 
     @Delete
-    fun delete(obj: List<RaceEventEntity>)
+    fun delete(value: List<RaceEventEntity>)
 
 }

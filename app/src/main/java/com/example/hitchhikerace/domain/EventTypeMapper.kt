@@ -1,13 +1,14 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.domain
 
 import android.content.Context
 import android.location.Location
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.data.database.RaceEventEntity
-import com.example.hitchhikerace.data.database.RaceEventType
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
+import com.example.hitchhikerace.data.pojo.RaceEventType
 import com.example.hitchhikerace.utils.SHIFT
 import com.example.hitchhikerace.utils.tryOrNull
 import com.example.hitchhikerace.view.eventcreation.*
+import com.example.hitchhikerace.view.fragments.base.BaseRaceEventView
 
 class EventTypeMapper {
     var i = 1

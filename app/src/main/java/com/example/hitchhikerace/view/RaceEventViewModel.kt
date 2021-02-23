@@ -1,6 +1,6 @@
 package com.example.hitchhikerace.view
 
-import com.example.hitchhikerace.data.database.RaceEventType
+import com.example.hitchhikerace.data.pojo.RaceEventType
 
 class RaceEventViewModel(
     val type: RaceEventType,

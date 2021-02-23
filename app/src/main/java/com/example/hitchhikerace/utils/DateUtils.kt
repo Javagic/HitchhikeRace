@@ -1,10 +1,3 @@
-/*
- Created by Ilya Reznik
- reznikid@altarix.ru
- skype be3bapuahta
- on 21.11.18 14:38
- */
-
 package com.example.hitchhikerace.utils
 
 import android.app.Activity
@@ -24,7 +17,7 @@ fun EditText.showDatePickerDialogOnClick(
 ) = setOnClickListener {
     DatePickerDialog(
         activity,
-        DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+        { _, year, month, dayOfMonth ->
             calendar.set(year, month, dayOfMonth)
             listener(calendar.time, this)
         },

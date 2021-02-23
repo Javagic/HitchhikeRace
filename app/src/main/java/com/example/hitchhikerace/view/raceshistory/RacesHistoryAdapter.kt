@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.data.database.SingleRaceEntity
+import com.example.hitchhikerace.data.database.entity.SingleRaceEntity
 import kotlinx.android.synthetic.main.item_races_history.view.*
 
 class RacesHistoryAdapter(private val onRaceClick: (SingleRaceEntity) -> Unit) :

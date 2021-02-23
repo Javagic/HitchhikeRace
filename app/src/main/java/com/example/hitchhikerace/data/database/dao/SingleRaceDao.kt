@@ -1,9 +1,10 @@
-package com.example.hitchhikerace.data.database
+package com.example.hitchhikerace.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.hitchhikerace.data.database.SingleRaceEntity.Companion.TABLE_SINGLE_RACE
+import com.example.hitchhikerace.data.database.entity.SingleRaceEntity
+import com.example.hitchhikerace.data.database.entity.SingleRaceEntity.Companion.TABLE_SINGLE_RACE
 import io.reactivex.Observable
 
 @Dao

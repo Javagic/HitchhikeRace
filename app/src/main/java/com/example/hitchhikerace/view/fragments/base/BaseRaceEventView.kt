@@ -1,13 +1,14 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.view.fragments.base
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.location.LocationManager
 import android.os.Build
 import android.widget.TimePicker
-import com.example.hitchhikerace.UserLocation
-import com.example.hitchhikerace.data.database.RaceEventEntity
+import com.example.hitchhikerace.utils.UserLocation
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
 import com.example.hitchhikerace.utils.tryOrNull
+import com.example.hitchhikerace.view.RaceEventViewModel
 import java.util.*
 
 abstract class BaseRaceEventView : BaseFragment() {

@@ -6,8 +6,8 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import com.example.hitchhikerace.app.RaceApplication
 import com.example.hitchhikerace.utils.navigateOnClick
-import com.example.hitchhikerace.view.BaseFragment
-import com.example.hitchhikerace.view.PreferenceManager
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
+import com.example.hitchhikerace.data.PreferenceManager
 import kotlinx.android.synthetic.main.screen_race_settings.*
 import javax.inject.Inject
 

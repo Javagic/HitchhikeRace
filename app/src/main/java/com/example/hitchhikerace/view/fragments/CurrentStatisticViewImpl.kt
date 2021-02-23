@@ -1,4 +1,4 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.view.fragments
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -8,6 +8,9 @@ import android.view.View
 import com.example.hitchhikerace.R
 import com.example.hitchhikerace.app.RaceApplication
 import com.example.hitchhikerace.domain.RaceEventInteractor
+import com.example.hitchhikerace.data.PreferenceManager
+import com.example.hitchhikerace.domain.EventTypeMapper
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.screen_current_statistic.*
@@ -41,6 +44,4 @@ class CurrentStatisticViewImpl : BaseFragment() {
             }, {})
             .let { disposable.add(it) }
     }
-
-
 }

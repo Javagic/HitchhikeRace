@@ -1,17 +1,22 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.view.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.example.hitchhikerace.view.activity.MainActivity
 import com.example.hitchhikerace.R
 import com.example.hitchhikerace.app.RaceApplication
-import com.example.hitchhikerace.data.database.RaceEventEntity
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
+import com.example.hitchhikerace.data.pojo.RaceEventType
 import com.example.hitchhikerace.domain.RaceEventInteractor
-import com.example.hitchhikerace.data.database.RaceEventType
 import com.example.hitchhikerace.utils.isVisible
+import com.example.hitchhikerace.utils.showToast
 import com.example.hitchhikerace.utils.subscribeWithErrorLogConsumer
+import com.example.hitchhikerace.data.PreferenceManager
+import com.example.hitchhikerace.data.RACE_EMPTY_ID
+import com.example.hitchhikerace.data.pojo.RestEntity
+import com.example.hitchhikerace.domain.EventTypeMapper
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -60,7 +65,7 @@ class CreateBaseEventViewImpl : BaseFragment() {
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
                                 close()
-                                (activity as? MainActivity)?.showToast()
+                                activity?.showToast()
                             }, {})
                     }
             } else if (eventType == RaceEventType.REST_START && raceEvent != null) {
@@ -73,10 +78,10 @@ class CreateBaseEventViewImpl : BaseFragment() {
                             preferenceManager.saveCurrentRace(RACE_EMPTY_ID)
                             preferenceManager.saveCurrentRest(RestEntity())
                             findNavController().setGraph(R.navigation.main_menu_navigation)
-                            (activity as? MainActivity)?.showToast()
+                            activity?.showToast()
                         } else {
                             close()
-                            (activity as? MainActivity)?.showToast()
+                            activity?.showToast()
                         }
                     }
             }

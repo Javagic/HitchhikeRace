@@ -11,7 +11,7 @@ import com.example.hitchhikerace.app.RaceApplication
 import com.example.hitchhikerace.domain.SingleRaceInteractor
 import com.example.hitchhikerace.utils.isVisible
 import com.example.hitchhikerace.utils.subscribeWithErrorLogConsumer
-import com.example.hitchhikerace.view.BaseFragment
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.screen_races_history.*

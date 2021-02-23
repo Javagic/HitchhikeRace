@@ -2,9 +2,9 @@ package com.example.hitchhikerace.di
 
 import com.example.hitchhikerace.view.activity.MainActivity
 import com.example.hitchhikerace.RaceSettingsViewImpl
-import com.example.hitchhikerace.view.CreateBaseEventViewImpl
-import com.example.hitchhikerace.view.CurrentStatisticViewImpl
-import com.example.hitchhikerace.view.MainScreenViewImpl
+import com.example.hitchhikerace.view.fragments.CreateBaseEventViewImpl
+import com.example.hitchhikerace.view.fragments.CurrentStatisticViewImpl
+import com.example.hitchhikerace.view.fragments.MainScreenViewImpl
 import com.example.hitchhikerace.view.eventcreation.CreateNewRaceViewImpl
 import com.example.hitchhikerace.view.raceinfo.SingleRaceInfoViewImpl
 import com.example.hitchhikerace.view.raceshistory.RacesHistoryViewImpl
@@ -14,6 +14,7 @@ import dagger.Component
 @Component(
     modules = [
         ApplicationModule::class,
+        UtilsModule::class,
         DbModule::class
     ]
 )

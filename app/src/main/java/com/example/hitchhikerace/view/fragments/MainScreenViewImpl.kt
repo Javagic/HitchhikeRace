@@ -1,4 +1,4 @@
-package com.example.hitchhikerace.view
+package com.example.hitchhikerace.view.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -8,10 +8,12 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.example.hitchhikerace.R
 import com.example.hitchhikerace.app.RaceApplication
-import com.example.hitchhikerace.data.database.RaceEventEntity
+import com.example.hitchhikerace.data.PreferenceManager
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
+import com.example.hitchhikerace.data.pojo.RaceEventType
 import com.example.hitchhikerace.domain.RaceEventInteractor
-import com.example.hitchhikerace.data.database.RaceEventType
 import com.example.hitchhikerace.utils.navigateOnClick
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -50,72 +52,63 @@ class MainScreenViewImpl : BaseFragment() {
                     R.drawable.background_button_event_green
                 )
                 if (eventList.isEmpty()) {
-                    btnCarStart.background = ContextCompat.getDrawable(
-                        btnCarStart.context,
-                        R.drawable.background_button_disabled
-                    )
-                    btnRest.background = ContextCompat.getDrawable(
-                        btnCarStart.context,
-                        R.drawable.background_button_disabled
-                    )
-                    btnOrientation.background = ContextCompat.getDrawable(
-                        btnCarStart.context,
-                        R.drawable.background_button_disabled
-                    )
-                    btnRun.background = ContextCompat.getDrawable(
-                        btnCarStart.context,
-                        R.drawable.background_button_disabled
-                    )
-                    btnMeeting.background = ContextCompat.getDrawable(
-                        btnCarStart.context,
-                        R.drawable.background_button_disabled
-                    )
-                    btnTakeCheckpoint.background = ContextCompat.getDrawable(
-                        btnCarStart.context,
-                        R.drawable.background_button_disabled
-                    )
-                    btnOther.background = ContextCompat.getDrawable(
-                        btnCarStart.context,
-                        R.drawable.background_button_disabled
-                    )
-                    return@subscribe
+                    showRaceNotStartedUi()
+                } else {
+                    showRaceIsStartedUi(eventList)
                 }
-                btnCarStart.initToggleButton(
-                    RaceEventType.CAR_START,
-                    RaceEventType.CAR_FINISH,
-                    getString(R.string.car_start_title),
-                    getString(R.string.car_finish_title),
-                    eventList
-                )
-                btnRest.initToggleButton(
-                    RaceEventType.REST_START,
-                    RaceEventType.REST_FINISH,
-                    getString(R.string.rest_start),
-                    getString(R.string.rest_finish),
-                    eventList
-                )
-                btnOrientation.initToggleButton(
-                    RaceEventType.ORIENTATION_START,
-                    RaceEventType.ORIENTATION_FINISH,
-                    getString(R.string.orientation_start),
-                    getString(R.string.orientation_finish),
-                    eventList
-                )
-                btnRun.initToggleButton(
-                    RaceEventType.RUN_START,
-                    RaceEventType.RUN_FINISH,
-                    getString(R.string.run_start),
-                    getString(R.string.run_finish),
-                    eventList
-                )
-                btnMeeting.navigateOnClickToCreation(RaceEventType.CREW_MEETING)
-                btnTakeCheckpoint.navigateOnClickToCreation(RaceEventType.TAKE_CHECKPOINT)
-                btnOther.navigateOnClickToCreation(RaceEventType.CUSTOM)
             }
             .addTo(disposable)
         btnSettings.navigateOnClick(R.id.main_to_settings)
         tvCurrentRest.text = restString()
         //TODO посчитать километраж гонки и пешком
+    }
+
+    private fun showRaceIsStartedUi(eventList: List<RaceEventEntity>) {
+        btnCarStart.initToggleButton(
+            RaceEventType.CAR_START,
+            RaceEventType.CAR_FINISH,
+            getString(R.string.car_start_title),
+            getString(R.string.car_finish_title),
+            eventList
+        )
+        btnRest.initToggleButton(
+            RaceEventType.REST_START,
+            RaceEventType.REST_FINISH,
+            getString(R.string.rest_start),
+            getString(R.string.rest_finish),
+            eventList
+        )
+        btnOrientation.initToggleButton(
+            RaceEventType.ORIENTATION_START,
+            RaceEventType.ORIENTATION_FINISH,
+            getString(R.string.orientation_start),
+            getString(R.string.orientation_finish),
+            eventList
+        )
+        btnRun.initToggleButton(
+            RaceEventType.RUN_START,
+            RaceEventType.RUN_FINISH,
+            getString(R.string.run_start),
+            getString(R.string.run_finish),
+            eventList
+        )
+        btnMeeting.navigateOnClickToCreation(RaceEventType.CREW_MEETING)
+        btnTakeCheckpoint.navigateOnClickToCreation(RaceEventType.TAKE_CHECKPOINT)
+        btnOther.navigateOnClickToCreation(RaceEventType.CUSTOM)
+    }
+
+    private fun showRaceNotStartedUi() {
+        val disabledDrawable = ContextCompat.getDrawable(
+            btnCarStart.context,
+            R.drawable.background_button_disabled
+        )
+        btnCarStart.background = disabledDrawable
+        btnRest.background = disabledDrawable
+        btnOrientation.background = disabledDrawable
+        btnRun.background = disabledDrawable
+        btnMeeting.background = disabledDrawable
+        btnTakeCheckpoint.background = disabledDrawable
+        btnOther.background = disabledDrawable
     }
 
     private fun Button.initToggleButton(

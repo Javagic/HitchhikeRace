@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import com.example.hitchhikerace.R
-import com.example.hitchhikerace.data.database.RaceEventEntity
-import com.example.hitchhikerace.data.database.RaceEventType
+import com.example.hitchhikerace.data.database.entity.RaceEventEntity
+import com.example.hitchhikerace.data.pojo.RaceEventType
 import com.example.hitchhikerace.utils.isVisible
 import com.example.hitchhikerace.utils.tryOrNull
-import com.example.hitchhikerace.view.BaseRaceEventView
-import com.example.hitchhikerace.view.PreferenceManager
+import com.example.hitchhikerace.view.fragments.base.BaseRaceEventView
+import com.example.hitchhikerace.data.PreferenceManager
 import com.example.hitchhikerace.view.RaceEventViewModel
-import com.example.hitchhikerace.view.RestEntity
+import com.example.hitchhikerace.data.pojo.RestEntity
 import kotlinx.android.synthetic.main.screen_race_start_finish.*
 
 class RaceStartViewImpl : BaseRaceEventView() {

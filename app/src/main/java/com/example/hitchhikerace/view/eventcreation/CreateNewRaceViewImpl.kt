@@ -7,14 +7,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.hitchhikerace.R
 import com.example.hitchhikerace.app.RaceApplication
 import com.example.hitchhikerace.domain.RaceEventInteractor
-import com.example.hitchhikerace.data.database.SingleRaceEntity
+import com.example.hitchhikerace.data.database.entity.SingleRaceEntity
 import com.example.hitchhikerace.domain.SingleRaceInteractor
 import com.example.hitchhikerace.utils.dateFormat
 import com.example.hitchhikerace.utils.showDatePickerDialogOnClick
 import com.example.hitchhikerace.utils.showKeyboard
 import com.example.hitchhikerace.utils.subscribeWithErrorLogConsumer
-import com.example.hitchhikerace.view.BaseFragment
-import com.example.hitchhikerace.view.PreferenceManager
+import com.example.hitchhikerace.view.fragments.base.BaseFragment
+import com.example.hitchhikerace.data.PreferenceManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.screen_new_race.*
 import java.util.*
