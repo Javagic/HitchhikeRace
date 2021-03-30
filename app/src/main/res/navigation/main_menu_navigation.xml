@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_main"
-        android:name="com.example.hitchhikerace.view.fragments.MainMenuViewImpl"
+        android:name="me.javagic.hitchhikerace.view.fragments.MainMenuViewImpl"
         tools:layout="@layout/screen_main_menu">
         <action
             android:id="@+id/main_menu_to_create_new_race"
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_create_new_race"
-        android:name="com.example.hitchhikerace.view.eventcreation.CreateNewRaceViewImpl"
+        android:name="me.javagic.hitchhikerace.view.eventcreation.CreateNewRaceViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_new_race">
 
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_races_history"
-        android:name="com.example.hitchhikerace.view.raceshistory.RacesHistoryViewImpl"
+        android:name="me.javagic.hitchhikerace.view.raceshistory.RacesHistoryViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_races_history">
 
@@ -44,7 +44,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_race_info"
-        android:name="com.example.hitchhikerace.view.raceinfo.SingleRaceInfoViewImpl"
+        android:name="me.javagic.hitchhikerace.view.raceinfo.SingleRaceInfoViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_race_info">
         <action
@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_create_event"
-        android:name="com.example.hitchhikerace.view.fragments.CreateBaseEventViewImpl"
+        android:name="me.javagic.hitchhikerace.view.fragments.CreateBaseEventViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_car_start" />
 </navigation>

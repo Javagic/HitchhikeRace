@@ -6,6 +6,7 @@
 /build
 /captures
 .externalNativeBuild
+.jks
 /annotations
 /buildSrc/.idea
 /buildSrc/.gradle

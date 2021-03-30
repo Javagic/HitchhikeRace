@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_events_screen"
-        android:name="com.example.hitchhikerace.view.fragments.MainScreenViewImpl"
+        android:name="me.javagic.hitchhikerace.view.fragments.MainScreenViewImpl"
         tools:layout="@layout/screen_events_main">
         <action
             android:id="@+id/main_to_create_event"
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_race_info"
-        android:name="com.example.hitchhikerace.view.raceinfo.SingleRaceInfoViewImpl"
+        android:name="me.javagic.hitchhikerace.view.raceinfo.SingleRaceInfoViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_race_info">
         <action
@@ -32,31 +32,31 @@
 
     <fragment
         android:id="@+id/nav_fragment_create_event"
-        android:name="com.example.hitchhikerace.view.fragments.CreateBaseEventViewImpl"
+        android:name="me.javagic.hitchhikerace.view.fragments.CreateBaseEventViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_car_start" />
 
     <fragment
         android:id="@+id/nav_fragment_crew_management"
-        android:name="com.example.hitchhikerace.view.fragments.CrewManagementViewImpl"
+        android:name="me.javagic.hitchhikerace.view.fragments.CrewManagementViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_crew_managment" />
 
     <fragment
         android:id="@+id/nav_fragment_current_statistic"
-        android:name="com.example.hitchhikerace.view.fragments.CurrentStatisticViewImpl"
+        android:name="me.javagic.hitchhikerace.view.fragments.CurrentStatisticViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_current_statistic" />
 
     <fragment
         android:id="@+id/nav_fragment_legend"
-        android:name="com.example.hitchhikerace.view.fragments.LegendViewImpl"
+        android:name="me.javagic.hitchhikerace.view.fragments.LegendViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_current_statistic" />
 
     <fragment
         android:id="@+id/nav_fragment_settings"
-        android:name="com.example.hitchhikerace.RaceSettingsViewImpl"
+        android:name="me.javagic.hitchhikerace.RaceSettingsViewImpl"
         android:label="fragment_match"
         tools:layout="@layout/screen_race_settings">
 
