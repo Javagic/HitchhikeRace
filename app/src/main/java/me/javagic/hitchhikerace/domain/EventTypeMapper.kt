@@ -116,7 +116,7 @@ class EventTypeMapper {
         RaceEventType.RUN_FINISH -> context.getString(R.string.run_finish)
         RaceEventType.ORIENTATION_START -> context.getString(R.string.orientation_start)
         RaceEventType.ORIENTATION_FINISH -> context.getString(R.string.orientation_finish)
-        RaceEventType.CREW_MEETING -> context.getString(R.string.event_type_car_start)
+        RaceEventType.CREW_MEETING -> context.getString(R.string.crew_meeting)
         RaceEventType.REST_START -> context.getString(R.string.rest_start)
         RaceEventType.REST_FINISH -> context.getString(R.string.rest_finish)
         RaceEventType.TAKE_CHECKPOINT -> context.getString(R.string.take_checkpoint)

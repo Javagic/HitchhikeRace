@@ -11,6 +11,7 @@
     <string name="other">Иное</string>
     <string name="take_checkpoint">Взятие КП</string>
     <string name="current_statistics">Текущая статистика</string>
+    <string name="export_statistic">Экспорт хроники</string>
     <string name="legend_title">Легенда</string>
     <string name="hint_new_race_title">Введите название новой гонки</string>
     <string name="description_hint">Введите дополнительные подробности</string>
@@ -21,6 +22,7 @@
     <string name="date_race_start">Введите дату начала гонки</string>
     <string name="date_race_end">Введите дату конца гонки</string>
     <string name="crew_meeting">Встреча экипажа</string>
+    <string name="meeting">Встреча экипажа</string>
     <string name="time_rest_finish">Введите время завершения реста</string>
     <string name="race_start_title">Начало гонки</string>
     <string name="race_finish_title">Финиш гонки</string>
@@ -28,6 +30,8 @@
     <string name="run_finish">Завершение бега</string>
     <string name="rest">Рест</string>
     <string name="rest_start">Рест начало</string>
+    <string name="rest_eng">Rest</string>
+    <string name="rest_finish_eng">Rest снят</string>
     <string name="rest_finish">Рест конец</string>
     <string name="orientation_start">Начало ориентирования</string>
     <string name="main_screen_title">Гонки КСА</string>
@@ -42,7 +46,33 @@
     <string name="checkpoint_management_hint">Ввести контрольные точки гонки…</string>
     <string name="event_to_string">%1$s\nОписание: %2$s, %3$s : %4$s</string>
     <string name="need_permission">Для сбора полной статистики гонки необходимо дать разрешения:</string>
-    <string name="legend">Подпольная гонка!</string>
+    <string name="legend">
+        1А-Q1
++3:00 Rest\n1А-Q2
++1:00 штраф\n1B-Q1
++4:00 Rest\n1B-Q2
++1:00 штраф\n1C-Q1
++4:30 Rest\n1C-Q2
++1:00 к КС\n1D-Q1
++3:30 Rest\n1D-Q2
++1:00 штраф\n1D-Q3
+Открывает вилку Bonus
++1:00 штраф\n2А-Q1
++2:00 Rest\n2А-Q2
++1:00 штраф\n2B-Q1
++2:30 Rest\n2B-Q2
++1:00 штраф\n2C-Q1
++2:30 Rest\n2C-Q2
++1:00 штраф\n2D-Q1
++3:00 Rest\n2D-Q2
++1:00 к КС\n2D-Q3
++1:00 к КС
+-1:00 к времени финиша\nBonus 1
+-1:00 к времени финиша
++1:00 к КС\nBonus 2
+-2:00 к времени финиша\nBonus 3
+-1:00 к времени финиша
++1:00 КС</string>
     <string name="empty_history">История гонок пока пуста</string>
     <string name="toast_confirmation">Событие сохранено</string>
     <string name="finish_race_confirmation">Долгое нажатие на кнопку для подтверждения окончания гонки</string>
@@ -55,4 +85,9 @@
     <string name="date_from">с %1$s</string>
     <string name="date_to">по %1$s</string>
     <string name="settings_title">Настройки</string>
+    <string name="start">Старт</string>
+    <string name="finish">Финиш</string>
+    <string name="start_run">Бег начало</string>
+    <string name="finish_run">Бег конец</string>
+
 </resources>
