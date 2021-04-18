@@ -8,6 +8,7 @@ import me.javagic.hitchhikerace.data.pojo.RaceEventType
 import me.javagic.hitchhikerace.utils.SHIFT
 import me.javagic.hitchhikerace.utils.tryOrNull
 import me.javagic.hitchhikerace.view.eventcreation.*
+import me.javagic.hitchhikerace.view.eventcreation.takecheckpoint.TakeCheckPointViewImpl
 import me.javagic.hitchhikerace.view.fragments.base.BaseRaceEventView
 
 class EventTypeMapper {
@@ -61,11 +62,17 @@ class EventTypeMapper {
             )
         }
         if (eventType.raceEventType == RaceEventType.TAKE_CHECKPOINT) {
-            return "Взятие точки: " + eventType.timeString + SHIFT + eventType.mainText + SHIFT + " " + restString(
+            return "-----------------$SHIFT" + "Взятие точки ${
+                tryOrNull {
+                    eventType.specialDataText.split(
+                        "\n"
+                    )[0]
+                } ?: ""
+            }: " + eventType.timeString + SHIFT + " " + restString(
                 eventType
             ) + additionalInfo(
                 eventType
-            ) + SHIFT + "-----------------"
+            ) + SHIFT + eventType.specialDataText + SHIFT + "-----------------"
         }
         if (eventType.raceEventType == RaceEventType.REST_START) {
             return "Рест взят " + eventType.timeString

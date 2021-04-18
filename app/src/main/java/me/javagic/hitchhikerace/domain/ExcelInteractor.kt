@@ -3,35 +3,40 @@ package me.javagic.hitchhikerace.domain
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Environment
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.FileProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import me.javagic.hitchhikerace.R
 import me.javagic.hitchhikerace.data.PreferenceManager
 import me.javagic.hitchhikerace.data.pojo.RaceEventType
 import org.apache.poi.hssf.usermodel.HSSFCellStyle
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
+import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.Font.BOLDWEIGHT_BOLD
 import org.apache.poi.ss.usermodel.IndexedColors
+import org.apache.poi.ss.usermodel.Row
+import org.apache.poi.ss.usermodel.Workbook
 import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject
 
 
-class ExelInteractor @Inject constructor(private val eventInteractor: RaceEventInteractor) {
+const val SHIFT = "\n"
+
+class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEventInteractor) {
     private val COLUMNs = arrayOf(
         "№",
         "Дата",
         "Время",
         "Событие",
         "Машина, Место, Комментарий",
-        "Потрачено Rest",
-        "",
-        ""
+        "Потрачено Rest"
     )
     private val filePath: File =
-        File(Environment.getExternalStorageDirectory().toString() + "/Demo.xls")
+        File(Environment.getExternalStorageDirectory().toString() + "/RaceApp.xls")
+
+    private lateinit var shareFilePath: File
 
     @SuppressLint("CheckResult")
     fun processFile(context: Context) {
@@ -39,7 +44,6 @@ class ExelInteractor @Inject constructor(private val eventInteractor: RaceEventI
         val createHelper = workbook.creationHelper
 
         val sheet = workbook.createSheet("Customers")
-
         val headerFont = workbook.createFont()
         headerFont.boldweight = BOLDWEIGHT_BOLD
 
@@ -47,6 +51,7 @@ class ExelInteractor @Inject constructor(private val eventInteractor: RaceEventI
         headerCellStyle.setFont(headerFont)
 
         headerCellStyle.fillPattern = HSSFCellStyle.SOLID_FOREGROUND
+        headerCellStyle.fillForegroundColor = IndexedColors.LIGHT_GREEN.getIndex()
         headerCellStyle.fillForegroundColor = IndexedColors.LIGHT_GREEN.getIndex()
 
         // Row for Header
@@ -65,6 +70,7 @@ class ExelInteractor @Inject constructor(private val eventInteractor: RaceEventI
 
         eventInteractor.getAllRaceEventList(PreferenceManager().getCurrentRace())
             .observeOn(AndroidSchedulers.mainThread())
+            .firstElement()
             .subscribe({ list ->
                 var rowIdx = 1
                 var carIndex = 1
@@ -77,10 +83,16 @@ class ExelInteractor @Inject constructor(private val eventInteractor: RaceEventI
                     row.createCell(1).setCellValue(event.timeString)
                     row.createCell(2).setCellValue(event.timeString)
                     row.createCell(3).setCellValue(getEventTypeTitle(context, event.raceEventType))
-                    row.createCell(4).setCellValue(event.mainText + event.eventDescription)
+                    row.createCell(4)
+                        .setCellValue(event.mainText + SHIFT + event.eventDescription + SHIFT + event.specialDataText)
                     if (event.raceEventType == RaceEventType.REST_FINISH) {
                         row.createCell(5).setCellValue(event.currentRest)
                     }
+                }
+                val rw = sheet.getRow(0)
+                (3 until rw.lastCellNum).forEach { colNum ->
+                    val columnWidth = (rw.getCell(colNum).toString().length * 0.44 + 2.24) * 768
+                    sheet.setColumnWidth(colNum, columnWidth.toInt())
                 }
                 try {
                     if (!filePath.exists()) {
@@ -90,25 +102,36 @@ class ExelInteractor @Inject constructor(private val eventInteractor: RaceEventI
                     workbook.write(fileOutputStream)
                     fileOutputStream.flush()
                     fileOutputStream.close()
-                    if (filePath.exists()) {
+
+                    val dirName = "${context.filesDir.absolutePath}/external_files"
+                    val directory = File(dirName)
+                    if (!directory.exists()) {
+                        directory.mkdir()
+                    }
+                    shareFilePath = File(dirName, "RaceApp.xls")
+                    if (!shareFilePath.exists()) {
+                        shareFilePath.createNewFile()
+                    }
+                    val sharefileOutputStream = FileOutputStream(shareFilePath)
+                    workbook.write(sharefileOutputStream)
+                    sharefileOutputStream.flush()
+                    sharefileOutputStream.close()
+                    if (shareFilePath.exists()) {
                         val intentShareFile = Intent(Intent.ACTION_SEND)
-                        intentShareFile.type = "application/pdf";
-                        intentShareFile.putExtra(
-                            Intent.EXTRA_STREAM,
-                            Uri.parse("file://" + filePath.path)
-                        )
-
-                        intentShareFile.putExtra(
-                            Intent.EXTRA_SUBJECT,
-                            "Sharing File..."
-                        )
-                        intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-
-                        startActivity(
+                        val uri = FileProvider.getUriForFile(
                             context,
-                            Intent.createChooser(intentShareFile, "Share File"),
-                            null
+                            context.applicationContext.packageName.toString() + ".provider",
+                            shareFilePath
                         )
+                        intentShareFile.type = "application/xls"
+                        intentShareFile.putExtra(Intent.EXTRA_STREAM, uri)
+                        intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        val j =
+                            Intent.createChooser(
+                                intentShareFile,
+                                "Choose an application to open with:"
+                            )
+                        startActivity(context, j, null)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -116,6 +139,25 @@ class ExelInteractor @Inject constructor(private val eventInteractor: RaceEventI
             }, {})
 
     }
+
+    fun autoSizeColumns(workbook: Workbook) {
+        val numberOfSheets = workbook.numberOfSheets
+        for (i in 0 until numberOfSheets) {
+            val sheet = workbook.getSheetAt(i)
+            if (sheet.physicalNumberOfRows > 0) {
+                val row: Row = sheet.getRow(sheet.firstRowNum)
+                val cellIterator: Iterator<Cell> = row.cellIterator()
+                while (cellIterator.hasNext()) {
+                    val cell: Cell = cellIterator.next()
+                    val columnIndex: Int = cell.columnIndex
+                    sheet.autoSizeColumn(columnIndex)
+                    val currentColumnWidth = sheet.getColumnWidth(columnIndex)
+                    sheet.setColumnWidth(columnIndex, currentColumnWidth + 2500)
+                }
+            }
+        }
+    }
+
 
     fun getEventTypeTitle(context: Context, type: RaceEventType) = when (type) {
         RaceEventType.RACE_START -> context.getString(R.string.start)

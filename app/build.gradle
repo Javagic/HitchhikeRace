@@ -8,7 +8,7 @@ android {
         release {
             storeFile file('C:\\Users\\miste\\AndroidStudioProjects\\HitchhikeRace\\keystore.jks')
             storePassword '123456'
-            keyAlias 'key0'
+            keyAlias 'key2'
             keyPassword '123456'
         }
     }

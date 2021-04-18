@@ -1,4 +1,4 @@
-package me.javagic.hitchhikerace.view.eventcreation
+package me.javagic.hitchhikerace.view.eventcreation.takecheckpoint
 
 import android.os.Bundle
 import android.view.View
