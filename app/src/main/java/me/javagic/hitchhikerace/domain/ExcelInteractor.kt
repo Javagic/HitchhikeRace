@@ -6,25 +6,38 @@ import android.content.Intent
 import android.os.Environment
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.FileProvider
+import com.fasterxml.jackson.module.kotlin.readValue
 import io.reactivex.android.schedulers.AndroidSchedulers
 import me.javagic.hitchhikerace.R
+import me.javagic.hitchhikerace.app.RaceApplication.Companion.mapper
 import me.javagic.hitchhikerace.data.PreferenceManager
+import me.javagic.hitchhikerace.data.database.entity.RaceEventEntity
 import me.javagic.hitchhikerace.data.pojo.RaceEventType
+import me.javagic.hitchhikerace.utils.tryOrNull
+import me.javagic.hitchhikerace.view.eventcreation.takecheckpoint.CheckPointCrew
 import org.apache.poi.hssf.usermodel.HSSFCellStyle
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.Font.BOLDWEIGHT_BOLD
 import org.apache.poi.ss.usermodel.IndexedColors
-import org.apache.poi.ss.usermodel.Row
-import org.apache.poi.ss.usermodel.Workbook
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
 const val SHIFT = "\n"
 
+fun RaceEventEntity.takeCheckpointText(): String {
+    val result = mainText + SHIFT + eventDescription
+    val text =
+        tryOrNull { mapper.readValue<List<CheckPointCrew>>(specialDataText) }?.takeIf { it.isNotEmpty() }
+            ?.joinToString(separator = "\n") { it.toString() }?.takeIf { it != "null" }
+    return result + (text?.takeIf { it != "null" } ?: "")
+}
+
 class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEventInteractor) {
+    var dateFormat = "dd.MM.yyyy"
     private val COLUMNs = arrayOf(
         "№",
         "Дата",
@@ -80,11 +93,19 @@ class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEvent
                         row.createCell(0).setCellValue(carIndex.toString())
                         carIndex++
                     }
-                    row.createCell(1).setCellValue(event.timeString)
+                    val calendar: Calendar = Calendar.getInstance()
+                    calendar.timeInMillis = event.realTime
+                    SimpleDateFormat(dateFormat).format(calendar.time)?.let {
+                        row.createCell(1).setCellValue(it)
+                    }
                     row.createCell(2).setCellValue(event.timeString)
                     row.createCell(3).setCellValue(getEventTypeTitle(context, event.raceEventType))
-                    row.createCell(4)
-                        .setCellValue(event.mainText + SHIFT + event.eventDescription + SHIFT + event.specialDataText)
+                    val commentCell = row.createCell(4)
+                    if (event.raceEventType == RaceEventType.TAKE_CHECKPOINT) {
+                        commentCell.setCellValue(event.takeCheckpointText())
+                    } else {
+                        commentCell.setCellValue(event.mainText + SHIFT + event.eventDescription + SHIFT + event.specialDataText)
+                    }
                     if (event.raceEventType == RaceEventType.REST_FINISH) {
                         row.createCell(5).setCellValue(event.currentRest)
                     }
@@ -139,25 +160,6 @@ class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEvent
             }, {})
 
     }
-
-    fun autoSizeColumns(workbook: Workbook) {
-        val numberOfSheets = workbook.numberOfSheets
-        for (i in 0 until numberOfSheets) {
-            val sheet = workbook.getSheetAt(i)
-            if (sheet.physicalNumberOfRows > 0) {
-                val row: Row = sheet.getRow(sheet.firstRowNum)
-                val cellIterator: Iterator<Cell> = row.cellIterator()
-                while (cellIterator.hasNext()) {
-                    val cell: Cell = cellIterator.next()
-                    val columnIndex: Int = cell.columnIndex
-                    sheet.autoSizeColumn(columnIndex)
-                    val currentColumnWidth = sheet.getColumnWidth(columnIndex)
-                    sheet.setColumnWidth(columnIndex, currentColumnWidth + 2500)
-                }
-            }
-        }
-    }
-
 
     fun getEventTypeTitle(context: Context, type: RaceEventType) = when (type) {
         RaceEventType.RACE_START -> context.getString(R.string.start)

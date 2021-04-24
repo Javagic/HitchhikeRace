@@ -26,7 +26,7 @@ fun EditText.showDatePickerDialogOnClick(
         calendar.get(Calendar.DAY_OF_MONTH)
     )
         .apply { setCancelable(true) }
-        .apply { datePicker.minDate = Calendar.getInstance().timeInMillis }
+//        .apply { datePicker.minDate = Calendar.getInstance().timeInMillis }
         .show()
 }
 
@@ -37,6 +37,10 @@ val Context.dateTimeFormat: SimpleDateFormat
 val Context.dateFormat: SimpleDateFormat
     get() =
         SimpleDateFormat(getString(R.string.date_format), Locale("RU"))
+
+val Context.dayMonthFormat: SimpleDateFormat
+    get() =
+        SimpleDateFormat(getString(R.string.day_month_format), Locale("RU"))
 val Context.timeFormat: SimpleDateFormat
     get() =
         SimpleDateFormat(getString(R.string.time_format), Locale("RU"))

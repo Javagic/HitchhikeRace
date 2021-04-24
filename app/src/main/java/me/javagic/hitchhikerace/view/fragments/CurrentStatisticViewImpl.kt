@@ -16,6 +16,7 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.screen_current_statistic.*
 import javax.inject.Inject
 
+@Deprecated(message = "Не используется вроде")
 class CurrentStatisticViewImpl : BaseFragment() {
 
     @Inject

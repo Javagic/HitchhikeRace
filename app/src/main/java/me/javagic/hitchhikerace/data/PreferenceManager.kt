@@ -79,6 +79,40 @@ class PreferenceManager @Inject constructor() {
         }
     }
 
+    fun getLegend(): String {
+        return RaceApplication.application.getSharedPreferences(
+            APPLICATION_PREFERENCES,
+            Context.MODE_PRIVATE
+        ).getString(KEY_CURRENT_RACE_ID, "").orEmpty()
+    }
+
+    fun saveLegend(legendText: String) {
+        RaceApplication.application.getSharedPreferences(
+            APPLICATION_PREFERENCES,
+            Context.MODE_PRIVATE
+        ).edit(true) {
+            putString(KEY_LEGEND_TEXT, legendText)
+            commit()
+        }
+    }
+
+    fun getMainCrewName(): String {
+        return RaceApplication.application.getSharedPreferences(
+            APPLICATION_PREFERENCES,
+            Context.MODE_PRIVATE
+        ).getString(KEY_MAIN_CREW_NAME, "").orEmpty()
+    }
+
+    fun saveMainCrewName(legendText: String) {
+        RaceApplication.application.getSharedPreferences(
+            APPLICATION_PREFERENCES,
+            Context.MODE_PRIVATE
+        ).edit(true) {
+            putString(KEY_MAIN_CREW_NAME, legendText)
+            commit()
+        }
+    }
+
     //TODO handle null state
     fun getCurrentRest(): RestEntity = tryOrNull {
         val listString = RaceApplication.application.getSharedPreferences(
@@ -92,6 +126,8 @@ class PreferenceManager @Inject constructor() {
 
     companion object {
         const val KEY_CURRENT_RACE_ID = "key_current_race"
+        const val KEY_LEGEND_TEXT = "key_legend_text"
+        const val KEY_MAIN_CREW_NAME = "KEY_MAIN_CREW_NAME"
         const val KEY_CREW_LIST = "key_crew_list"
         const val KEY_CHECKPOINT_LIST = "key_checkpoint_list"
         const val KEY_CURRENT_REST = "key_current_rest"

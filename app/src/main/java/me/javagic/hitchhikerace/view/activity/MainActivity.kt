@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         RaceApplication.appComponent.inject(this)
         this.supportActionBar?.hide()
+        //TODO тут падение если активити задестроилось
         setContentView(R.layout.activity_main)
         val raceStarted = preferenceManager.getCurrentRace() != -1L
         if (raceStarted) {

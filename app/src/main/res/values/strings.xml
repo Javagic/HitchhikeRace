@@ -13,6 +13,7 @@
     <string name="current_statistics">Текущая статистика</string>
     <string name="export_statistic">Экспорт хроники</string>
     <string name="legend_title">Легенда</string>
+    <string name="map_title">Карта</string>
     <string name="hint_new_race_title">Введите название новой гонки</string>
     <string name="description_hint">Введите дополнительные подробности</string>
     <string name="car_main_text_hint">Введите марку и модель автомобиля:</string>
@@ -25,6 +26,7 @@
     <string name="meeting">Встреча экипажа</string>
     <string name="time_rest_finish">Введите время завершения реста</string>
     <string name="race_start_title">Начало гонки</string>
+    <string name="race_start_legend">При необходимости введите легенду гонки</string>
     <string name="race_finish_title">Финиш гонки</string>
     <string name="run_start">Начало бега</string>
     <string name="run_finish">Завершение бега</string>
@@ -38,7 +40,7 @@
     <string name="main_screen_start_race">Начать новую гонку</string>
     <string name="main_screen_race_list">Просмотр предыдущих гонок</string>
     <string name="orientation_finish">Завершение ориентирования</string>
-    <string name="time_race_start_rest">Введите (час минуты делимость) реста через пробелы</string>
+    <string name="time_race_start_rest">Введите (час минуты делимость) реста через пробелы\nНапример: 8 0 9</string>
     <string name="crew_management_title">Управление экипажами</string>
     <string name="crew_management_description">Введите в поле ввода все позывные экипажей, учавствующих в гонке через пробелы. \n Это позволит быстро выбирать из предложенного списка при внесении событий в хронику. </string>
     <string name="checkpoint_management_description">Введите в поле ввода все контрольные точки гонки через пробелы</string>
@@ -47,40 +49,18 @@
     <string name="event_to_string">%1$s\nОписание: %2$s, %3$s : %4$s</string>
     <string name="need_permission">Для сбора полной статистики гонки необходимо дать разрешения:</string>
     <string name="legend">
-        1А-Q1
-+3:00 Rest\n1А-Q2
-+1:00 штраф\n1B-Q1
-+4:00 Rest\n1B-Q2
-+1:00 штраф\n1C-Q1
-+4:30 Rest\n1C-Q2
-+1:00 к КС\n1D-Q1
-+3:30 Rest\n1D-Q2
-+1:00 штраф\n1D-Q3
-Открывает вилку Bonus
-+1:00 штраф\n2А-Q1
-+2:00 Rest\n2А-Q2
-+1:00 штраф\n2B-Q1
-+2:30 Rest\n2B-Q2
-+1:00 штраф\n2C-Q1
-+2:30 Rest\n2C-Q2
-+1:00 штраф\n2D-Q1
-+3:00 Rest\n2D-Q2
-+1:00 к КС\n2D-Q3
-+1:00 к КС
--1:00 к времени финиша\nBonus 1
--1:00 к времени финиша
-+1:00 к КС\nBonus 2
--2:00 к времени финиша\nBonus 3
--1:00 к времени финиша
-+1:00 КС</string>
+
+Всем участникам необходимо иметь с собой общегражданский паспорт.</string>
     <string name="empty_history">История гонок пока пуста</string>
     <string name="toast_confirmation">Событие сохранено</string>
     <string name="finish_race_confirmation">Долгое нажатие на кнопку для подтверждения окончания гонки</string>
+    <string name="start_race_crew_name">Введите имя экипажа</string>
     <string name="finish_race_confirmed">Подтверждено</string>
     <string name="warning_race_start">Рест указан некорректно!</string>
     <string name="warning_checkpoint">Укажите контрольную точку!</string>
     <string name="date_time_format_long_year">dd.MM.yyyy HH:mm</string>
     <string name="date_format">dd.MM.yyyy</string>
+    <string name="day_month_format">dd.MM</string>
     <string name="time_format">HH:mm</string>
     <string name="date_from">с %1$s</string>
     <string name="date_to">по %1$s</string>

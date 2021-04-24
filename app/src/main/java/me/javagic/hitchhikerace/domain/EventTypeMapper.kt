@@ -62,17 +62,10 @@ class EventTypeMapper {
             )
         }
         if (eventType.raceEventType == RaceEventType.TAKE_CHECKPOINT) {
-            return "-----------------$SHIFT" + "Взятие точки ${
-                tryOrNull {
-                    eventType.specialDataText.split(
-                        "\n"
-                    )[0]
-                } ?: ""
-            }: " + eventType.timeString + SHIFT + " " + restString(
+            return "-----------------$SHIFT" + "Взятие точки ${eventType.mainText}: " + SHIFT +
+                    eventType.timeString + SHIFT + " " + restString(
                 eventType
-            ) + additionalInfo(
-                eventType
-            ) + SHIFT + eventType.specialDataText + SHIFT + "-----------------"
+            )  + SHIFT + eventType.takeCheckpointText() + SHIFT + "-----------------"
         }
         if (eventType.raceEventType == RaceEventType.REST_START) {
             return "Рест взят " + eventType.timeString

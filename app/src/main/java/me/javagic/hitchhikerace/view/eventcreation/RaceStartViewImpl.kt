@@ -3,16 +3,16 @@ package me.javagic.hitchhikerace.view.eventcreation
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import kotlinx.android.synthetic.main.screen_race_start_finish.*
 import me.javagic.hitchhikerace.R
+import me.javagic.hitchhikerace.data.PreferenceManager
 import me.javagic.hitchhikerace.data.database.entity.RaceEventEntity
 import me.javagic.hitchhikerace.data.pojo.RaceEventType
+import me.javagic.hitchhikerace.data.pojo.RestEntity
 import me.javagic.hitchhikerace.utils.isVisible
 import me.javagic.hitchhikerace.utils.tryOrNull
-import me.javagic.hitchhikerace.view.fragments.base.BaseRaceEventView
-import me.javagic.hitchhikerace.data.PreferenceManager
 import me.javagic.hitchhikerace.view.RaceEventViewModel
-import me.javagic.hitchhikerace.data.pojo.RestEntity
-import kotlinx.android.synthetic.main.screen_race_start_finish.*
+import me.javagic.hitchhikerace.view.fragments.base.BaseRaceEventView
 
 class RaceStartViewImpl : BaseRaceEventView() {
 
@@ -20,6 +20,7 @@ class RaceStartViewImpl : BaseRaceEventView() {
 
     override fun validateInput(): String {
         if (!isStart && !canGoNext) return getString(R.string.finish_race_confirmation)
+        else if (isStart && crewNameText.text.isEmpty()) return getString(R.string.start_race_crew_name)
         else if (!isStart) return ""
         return tryOrNull { RestEntity(etRestCurrent.text.trim().split(" ")) }?.let { "" }
             ?: getString(R.string.warning_race_start)
@@ -39,6 +40,7 @@ class RaceStartViewImpl : BaseRaceEventView() {
                 btnFinishRace.text = getString(R.string.finish_race_confirmed)
                 true
             }
+            crewNameText.isVisible = false
         } else {
             btnFinishRace.isVisible = false
         }
@@ -54,6 +56,7 @@ class RaceStartViewImpl : BaseRaceEventView() {
         if (isStart) {
             RestEntity(etRestCurrent.text.split(" "))
                 .let { PreferenceManager().saveCurrentRest(it) }
+            PreferenceManager().saveMainCrewName(legendText.text.toString())
             return RaceEventViewModel(
                 RaceEventType.RACE_START,
                 getString(R.string.race_start_title),

@@ -59,5 +59,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etRestCurrent" />
 
+        <EditText
+            android:id="@+id/crewNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_screen_offset"
+            android:layout_marginTop="15dp"
+            android:hint="@string/start_race_crew_name"
+            app:layout_constraintTop_toBottomOf="@+id/etRestCurrent" />
+
+        <EditText
+            android:id="@+id/legendText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:minLines="4"
+            android:visibility="gone"
+            android:hint="@string/race_start_legend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etRestCurrent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
