@@ -33,7 +33,7 @@ fun RaceEventEntity.takeCheckpointText(): String {
     val text =
         tryOrNull { mapper.readValue<List<CheckPointCrew>>(specialDataText) }?.takeIf { it.isNotEmpty() }
             ?.joinToString(separator = "\n") { it.toString() }?.takeIf { it != "null" }
-    return result + (text?.takeIf { it != "null" } ?: "")
+    return result + (text?.takeIf { it != "null" }?.let {"\n$text" } ?: "")
 }
 
 class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEventInteractor) {
