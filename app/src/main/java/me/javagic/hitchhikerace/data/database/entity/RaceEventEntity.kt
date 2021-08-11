@@ -16,12 +16,12 @@ data class RaceEventEntity(
     val eventDescription: String,
     val mainText: String,
     val specialDataText: String,
-    val hour: String,
-    val minute: String,
+    var hour: String,
+    var minute: String,
     val realTime: Long,
     val latitude: Double,
     val longitude: Double,
-    val currentRest: String
+    var currentRest: String
 ) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)

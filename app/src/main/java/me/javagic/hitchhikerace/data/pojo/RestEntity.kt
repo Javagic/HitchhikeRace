@@ -1,6 +1,6 @@
 package me.javagic.hitchhikerace.data.pojo
 
-class RestEntity(val hour: Int = 0, val minute: Int = 0, val partitions: Int = 0) {
+data class RestEntity(val hour: Int = 0, val minute: Int = 0, val partitions: Int = 0) {
 
     override fun toString(): String {
         return "$hour $minute $partitions"

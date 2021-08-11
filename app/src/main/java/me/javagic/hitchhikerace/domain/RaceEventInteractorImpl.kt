@@ -38,4 +38,12 @@ class RaceEventInteractorImpl @Inject constructor(
             .getAllSingle(raceId)
             .subscribeOn(ioScheduler)
     }
+
+    override fun insertAllRaceEventList(list: List<RaceEventEntity>): Completable {
+        return Completable.fromCallable {
+            appDatabase.raceEventDao()
+                .insert(list)
+        }
+            .subscribeOn(ioScheduler)
+    }
 }

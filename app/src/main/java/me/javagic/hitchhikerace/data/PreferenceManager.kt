@@ -12,7 +12,7 @@ import javax.inject.Inject
 const val RACE_EMPTY_ID = -1L
 
 @PerApplication
-class PreferenceManager @Inject constructor() {
+class PreferenceManager @Inject constructor() : IPreferenceManager {
 
     fun saveCurrentRace(currentRaceId: Long) {
         RaceApplication.application.getSharedPreferences(
@@ -24,7 +24,7 @@ class PreferenceManager @Inject constructor() {
         }
     }
 
-    fun getCurrentRace(): Long {
+    override fun getCurrentRace(): Long {
         return RaceApplication.application.getSharedPreferences(
             APPLICATION_PREFERENCES,
             Context.MODE_PRIVATE
@@ -69,7 +69,7 @@ class PreferenceManager @Inject constructor() {
             ?: emptyList()
     }
 
-    fun saveCurrentRest(newRest: RestEntity) {
+    override fun saveCurrentRest(newRest: RestEntity) {
         RaceApplication.application.getSharedPreferences(
             APPLICATION_PREFERENCES,
             Context.MODE_PRIVATE
