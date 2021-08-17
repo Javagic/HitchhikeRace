@@ -52,7 +52,7 @@ class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEvent
     private lateinit var shareFilePath: File
 
     @SuppressLint("CheckResult")
-    fun processFile(context: Context) {
+    fun processFile(context: Context,raceId: Long) {
         val workbook = HSSFWorkbook()
         val createHelper = workbook.creationHelper
 
@@ -81,7 +81,7 @@ class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEvent
         val ageCellStyle = workbook.createCellStyle()
         ageCellStyle.dataFormat = createHelper.createDataFormat().getFormat("#")
 
-        eventInteractor.getAllRaceEventList(PreferenceManager().getCurrentRace())
+        eventInteractor.getAllRaceEventList(raceId)
             .observeOn(AndroidSchedulers.mainThread())
             .firstElement()
             .subscribe({ list ->

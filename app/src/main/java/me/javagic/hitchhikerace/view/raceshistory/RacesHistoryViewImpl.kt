@@ -6,15 +6,16 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
+import kotlinx.android.synthetic.main.screen_races_history.*
 import me.javagic.hitchhikerace.R
 import me.javagic.hitchhikerace.app.RaceApplication
+import me.javagic.hitchhikerace.domain.ExcelInteractor
 import me.javagic.hitchhikerace.domain.SingleRaceInteractor
 import me.javagic.hitchhikerace.utils.isVisible
 import me.javagic.hitchhikerace.utils.subscribeWithErrorLogConsumer
 import me.javagic.hitchhikerace.view.fragments.base.BaseFragment
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.screen_races_history.*
 import javax.inject.Inject
 
 class RacesHistoryViewImpl : BaseFragment() {
@@ -22,9 +23,14 @@ class RacesHistoryViewImpl : BaseFragment() {
     @Inject
     lateinit var raceInteractor: SingleRaceInteractor
 
-    private val racesAdapter = RacesHistoryAdapter {
+    @Inject
+    lateinit var excelInteractor: ExcelInteractor
+
+    private val racesAdapter = RacesHistoryAdapter({
         findNavController().navigate(R.id.races_history_to_race_info, bundleOf("raceId" to it.id))
-    }
+    }, { raceEntity ->
+        context?.let { excelInteractor.processFile(it, raceEntity.id) }
+    })
 
     override fun getLayoutId(): Int = R.layout.screen_races_history
 

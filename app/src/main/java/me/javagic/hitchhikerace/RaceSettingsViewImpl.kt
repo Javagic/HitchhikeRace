@@ -38,7 +38,7 @@ class RaceSettingsViewImpl : BaseFragment() {
             )
         }
         btnExportStatistic.setOnClickListener {
-            excelInteractor.processFile(it.context)
+            excelInteractor.processFile(it.context, PreferenceManager().getCurrentRace())
         }
     }
 
@@ -49,7 +49,8 @@ class RaceSettingsViewImpl : BaseFragment() {
     }
 
     private fun openMapLink() {
-        val uri: Uri = Uri.parse("https://yandex.ru/maps/?um=constructor:d2371def1d81fd6c1b97c721c2e3b8ee31603666c1106900174e80a13b1dfe3e&source=constructorLink")
+        val uri: Uri =
+            Uri.parse("https://yandex.ru/maps/?um=constructor:d2371def1d81fd6c1b97c721c2e3b8ee31603666c1106900174e80a13b1dfe3e&source=constructorLink")
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
