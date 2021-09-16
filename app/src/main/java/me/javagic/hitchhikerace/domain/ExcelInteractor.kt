@@ -10,7 +10,6 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import io.reactivex.android.schedulers.AndroidSchedulers
 import me.javagic.hitchhikerace.R
 import me.javagic.hitchhikerace.app.RaceApplication.Companion.mapper
-import me.javagic.hitchhikerace.data.PreferenceManager
 import me.javagic.hitchhikerace.data.database.entity.RaceEventEntity
 import me.javagic.hitchhikerace.data.pojo.RaceEventType
 import me.javagic.hitchhikerace.utils.tryOrNull
@@ -33,7 +32,7 @@ fun RaceEventEntity.takeCheckpointText(): String {
     val text =
         tryOrNull { mapper.readValue<List<CheckPointCrew>>(specialDataText) }?.takeIf { it.isNotEmpty() }
             ?.joinToString(separator = "\n") { it.toString() }?.takeIf { it != "null" }
-    return result + (text?.takeIf { it != "null" }?.let {"\n$text" } ?: "")
+    return result + (text?.takeIf { it != "null" }?.let { "\n$text" } ?: "")
 }
 
 class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEventInteractor) {
@@ -52,7 +51,7 @@ class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEvent
     private lateinit var shareFilePath: File
 
     @SuppressLint("CheckResult")
-    fun processFile(context: Context,raceId: Long) {
+    fun processFile(context: Context, raceId: Long) {
         val workbook = HSSFWorkbook()
         val createHelper = workbook.creationHelper
 
@@ -80,7 +79,7 @@ class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEvent
         // CellStyle for Age
         val ageCellStyle = workbook.createCellStyle()
         ageCellStyle.dataFormat = createHelper.createDataFormat().getFormat("#")
-
+        var technicalText = ""
         eventInteractor.getAllRaceEventList(raceId)
             .observeOn(AndroidSchedulers.mainThread())
             .firstElement()
@@ -109,8 +108,13 @@ class ExcelInteractor @Inject constructor(private val eventInteractor: RaceEvent
                     if (event.raceEventType == RaceEventType.REST_FINISH) {
                         row.createCell(5).setCellValue(event.currentRest)
                     }
+                    if (event.technicalText.isNotEmpty()) {
+                        technicalText += "Строка $rowIdx:\n" + event.technicalText + "\n"
+                    }
                 }
                 val rw = sheet.getRow(0)
+                val technicalRow = sheet.createRow(rowIdx)
+                technicalRow.createCell(rw.lastCellNum).setCellValue(technicalText)
                 (3 until rw.lastCellNum).forEach { colNum ->
                     val columnWidth = (rw.getCell(colNum).toString().length * 0.44 + 2.24) * 768
                     sheet.setColumnWidth(colNum, columnWidth.toInt())

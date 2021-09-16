@@ -10,5 +10,6 @@ class RaceEventViewModel(
     val hour: String,
     val minute: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    var technicalText: String = ""
 )

@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.screen_base_event.*
 import me.javagic.hitchhikerace.R
+import me.javagic.hitchhikerace.Texting
 import me.javagic.hitchhikerace.app.RaceApplication
 import me.javagic.hitchhikerace.data.PreferenceManager
 import me.javagic.hitchhikerace.data.RACE_EMPTY_ID
@@ -65,6 +66,7 @@ class CreateBaseEventViewImpl : BaseFragment() {
                     .subscribeOn(Schedulers.io())
                     .subscribeWithErrorLogConsumer {
                         if (raceEvent?.id == null) {
+                            newEvent.technicalText = Texting.technicalText(raceEvent)
                             eventInteractor.addEvent(raceEvent?.id ?: 0, newEvent)
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({
@@ -83,6 +85,7 @@ class CreateBaseEventViewImpl : BaseFragment() {
             } else if (eventType == RaceEventType.REST_START && raceEvent != null) {
                 //начало реста менять не разрешаем
             } else {
+                newEvent.technicalText = Texting.technicalText(raceEvent)
                 eventInteractor.addEvent(raceEvent?.id ?: 0, newEvent)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWithErrorLogConsumer {

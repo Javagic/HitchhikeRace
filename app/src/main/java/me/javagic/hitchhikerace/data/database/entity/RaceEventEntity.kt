@@ -2,8 +2,8 @@ package me.javagic.hitchhikerace.data.database.entity
 
 import android.os.Parcelable
 import androidx.room.*
-import me.javagic.hitchhikerace.data.pojo.RaceEventType
 import kotlinx.android.parcel.Parcelize
+import me.javagic.hitchhikerace.data.pojo.RaceEventType
 
 const val TABLE_RACE_EVENT = "table_race_event"
 
@@ -21,7 +21,8 @@ data class RaceEventEntity(
     val realTime: Long,
     val latitude: Double,
     val longitude: Double,
-    var currentRest: String
+    var currentRest: String,
+    val technicalText: String = ""// хранение прочей информации для арбитража
 ) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)

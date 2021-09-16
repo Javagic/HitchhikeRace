@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\miste\\AndroidStudioProjects\\HitchhikeRace\\keystore.jks')
+            storeFile file('C:\\Users\\ireznik\\AndroidStudioProjects\\HitchhikeRace\\keystore.jks')
             storePassword '123456'
             keyAlias 'key2'
             keyPassword '123456'
@@ -64,8 +64,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
-    implementation 'com.google.dagger:dagger:2.29.1'
-    kapt 'com.google.dagger:dagger-compiler:2.29.1'
+    implementation 'com.google.dagger:dagger:2.37'
+    kapt 'com.google.dagger:dagger-compiler:2.37'
 
     implementation 'org.mockito:mockito-core:3.10.0'
     implementation 'org.mockito.kotlin:mockito-kotlin:3.2.0'
