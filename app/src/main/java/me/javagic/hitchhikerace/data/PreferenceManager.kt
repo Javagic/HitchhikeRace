@@ -83,7 +83,7 @@ class PreferenceManager @Inject constructor() : IPreferenceManager {
         return RaceApplication.application.getSharedPreferences(
             APPLICATION_PREFERENCES,
             Context.MODE_PRIVATE
-        ).getString(KEY_CURRENT_RACE_ID, "").orEmpty()
+        ).getString(KEY_LEGEND_TEXT, "").orEmpty()
     }
 
     fun saveLegend(legendText: String) {
@@ -92,6 +92,23 @@ class PreferenceManager @Inject constructor() : IPreferenceManager {
             Context.MODE_PRIVATE
         ).edit(true) {
             putString(KEY_LEGEND_TEXT, legendText)
+            commit()
+        }
+    }
+
+    fun getMap(): String {
+        return RaceApplication.application.getSharedPreferences(
+            APPLICATION_PREFERENCES,
+            Context.MODE_PRIVATE
+        ).getString(KEY_MAP, "").orEmpty()
+    }
+
+    fun saveMap(mapText: String) {
+        RaceApplication.application.getSharedPreferences(
+            APPLICATION_PREFERENCES,
+            Context.MODE_PRIVATE
+        ).edit(true) {
+            putString(KEY_MAP, mapText)
             commit()
         }
     }
@@ -127,6 +144,7 @@ class PreferenceManager @Inject constructor() : IPreferenceManager {
     companion object {
         const val KEY_CURRENT_RACE_ID = "key_current_race"
         const val KEY_LEGEND_TEXT = "key_legend_text"
+        const val KEY_MAP = "key_map"
         const val KEY_MAIN_CREW_NAME = "KEY_MAIN_CREW_NAME"
         const val KEY_CREW_LIST = "key_crew_list"
         const val KEY_CHECKPOINT_LIST = "key_checkpoint_list"
