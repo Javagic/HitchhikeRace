@@ -40,6 +40,7 @@ class RaceSettingsViewImpl : BaseFragment() {
         btnExportStatistic.setOnClickListener {
             excelInteractor.processFile(it.context, PreferenceManager().getCurrentRace())
         }
+        appVersionName.text = "Версия приложения: " + BuildConfig.VERSION_NAME
     }
 
     private fun openLegendLink() {
